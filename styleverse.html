@@ -14,7 +14,6 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-XXXXXXXXXX');
-        console.log("Google Analytics initialized. Replace 'G-XXXXXXXXXX' with your real Measurement ID.");
     </script>
     
     <style>
@@ -40,7 +39,6 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
         
-        /* Header */
         .site-header {
             background: rgba(254, 250, 245, 0.96);
             backdrop-filter: blur(8px);
@@ -73,7 +71,6 @@
         .nav-links a:hover { color: var(--accent); }
         .menu-icon { display: none; font-size: 1.7rem; cursor: pointer; }
         
-        /* Hero */
         .hero {
             background: linear-gradient(97deg, #f8efe7 0%, #fff4ec 100%);
             padding: 64px 0 80px;
@@ -92,7 +89,6 @@
         .btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
         .hero-visual { flex: 1; border-radius: 28px; min-height: 300px; background-size: cover; background-position: 60% 30%; box-shadow: var(--shadow-md); }
         
-        /* Blog Grid */
         .section { padding: 72px 0; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; margin-bottom: 12px; }
         .section-sub { color: var(--text-muted); margin-bottom: 48px; border-left: 3px solid var(--accent); padding-left: 16px; }
@@ -104,73 +100,89 @@
         .post-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
         .card-img { height: 240px; background-size: cover; background-position: center; }
         .card-content { padding: 24px; }
-        .card-category { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600; }
-        .card-content h3 { font-size: 1.4rem; margin: 10px 0 12px; font-weight: 600; }
-        .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+        .card-category { 
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600;
+            display: inline-block; padding: 4px 12px; background: #f8efe7; border-radius: 50px;
+        }
+        .card-content h3 { font-size: 1.4rem; margin: 12px 0 12px; font-weight: 600; line-height: 1.3; }
+        .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6; }
         .read-more {
             font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px;
-            transition: gap 0.2s; cursor: pointer; margin-top: 12px;
+            transition: gap 0.2s; cursor: pointer; margin-top: 8px;
         }
         .read-more:hover { gap: 12px; }
         .post-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; border-top: 1px solid var(--border-light); padding-top: 14px; }
         .like-btn {
-            background: none; border: none; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;
-            color: var(--text-muted); cursor: pointer; font-weight: 500;
+            background: none; border: none; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+            color: var(--text-muted); cursor: pointer; font-weight: 500; transition: all 0.2s;
+            padding: 6px 12px; border-radius: 40px;
         }
+        .like-btn:hover { background: #f8efe7; }
         .like-btn.liked { color: #e25555; }
+        .like-btn.liked i { animation: heartPop 0.3s ease; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
         .trend-tag { font-size: 0.7rem; background: #f0e4da; padding: 4px 12px; border-radius: 50px; color: var(--accent-dark); }
         
-        /* Trending Bar */
         .trending-bar { background: #1e1e2a; color: #f0e4da; padding: 8px 0; overflow: hidden; white-space: nowrap; }
         .ticker { display: inline-block; animation: tickerScroll 22s linear infinite; }
         .ticker span { margin-right: 40px; }
         @keyframes tickerScroll { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
-        /* Newsletter */
         .newsletter { background: #2c2c3a; color: white; border-radius: 40px; padding: 56px 48px; text-align: center; margin: 32px 0 24px; }
         .news-form { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 500px; margin: 0 auto; }
-        .news-form input { flex: 1; padding: 14px 20px; border-radius: 60px; border: none; outline: none; }
-        .news-form button { background: var(--accent); border: none; padding: 14px 28px; border-radius: 60px; font-weight: 600; color: white; cursor: pointer; }
+        .news-form input { flex: 1; padding: 14px 20px; border-radius: 60px; border: none; outline: none; font-size: 1rem; }
+        .news-form button { background: var(--accent); border: none; padding: 14px 28px; border-radius: 60px; font-weight: 600; color: white; cursor: pointer; transition: 0.2s; }
+        .news-form button:hover { background: var(--accent-dark); }
         
-        /* Blog Post Modal */
         .post-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85);
             z-index: 1000; display: none; justify-content: center; align-items: center; overflow-y: auto;
         }
         .post-modal {
-            background: white; max-width: 800px; width: 90%; margin: 40px auto; border-radius: 32px;
+            background: white; max-width: 850px; width: 90%; margin: 40px auto; border-radius: 32px;
             padding: 48px; position: relative; max-height: 90vh; overflow-y: auto;
         }
         .close-modal {
-            position: absolute; top: 20px; right: 24px; font-size: 28px; cursor: pointer; color: var(--text-muted);
-            transition: color 0.2s;
+            position: absolute; top: 24px; right: 28px; font-size: 28px; cursor: pointer; color: var(--text-muted);
+            transition: color 0.2s; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: #f8efe7;
         }
-        .close-modal:hover { color: var(--accent); }
-        .post-modal h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 20px 0 16px; }
-        .post-meta { color: var(--accent); font-size: 0.85rem; margin-bottom: 24px; }
+        .close-modal:hover { color: var(--accent); background: #f0e4da; }
+        .post-modal h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 20px 0 16px; line-height: 1.3; }
+        .post-meta { color: var(--accent); font-size: 0.85rem; margin-bottom: 24px; display: flex; gap: 16px; align-items: center; }
         .post-modal img { width: 100%; border-radius: 24px; margin: 20px 0; }
-        .post-content p { margin-bottom: 20px; line-height: 1.7; color: var(--text-dark); }
-        .post-content h3 { margin: 24px 0 12px; font-family: 'Playfair Display', serif; }
+        .post-content p { margin-bottom: 20px; line-height: 1.8; color: var(--text-dark); font-size: 1.05rem; }
+        .post-content h3 { margin: 32px 0 16px; font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+        .post-content h4 { margin: 20px 0 10px; font-size: 1.1rem; color: var(--accent); }
+        .post-content ul, .post-content ol { margin: 16px 0 16px 24px; line-height: 1.7; }
+        .post-content li { margin: 8px 0; }
+        .pull-quote {
+            background: #f8efe7; padding: 24px 32px; border-left: 4px solid var(--accent);
+            margin: 32px 0; font-style: italic; font-size: 1.2rem; font-family: 'Playfair Display', serif;
+        }
         
         footer { background: #f2ebe4; padding: 48px 0 32px; margin-top: 40px; border-top: 1px solid var(--border-light); }
         .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
         .social-icons a { margin-right: 20px; font-size: 1.3rem; color: #5a5a6e; transition: color 0.2s; }
         .social-icons a:hover { color: var(--accent); }
-        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2c2c3a; color: white; padding: 12px 24px; border-radius: 60px; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-        .mobile-nav { position: fixed; top: 70px; left: 0; width: 100%; background: white; padding: 24px; display: flex; flex-direction: column; gap: 20px; z-index: 99; transform: translateY(-120%); transition: transform 0.3s; border-bottom: 1px solid var(--border-light); }
+        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2c2c3a; color: white; padding: 12px 24px; border-radius: 60px; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; font-size: 0.9rem; }
+        .mobile-nav { position: fixed; top: 70px; left: 0; width: 100%; background: white; padding: 24px; display: flex; flex-direction: column; gap: 20px; z-index: 99; transform: translateY(-120%); transition: transform 0.3s; border-bottom: 1px solid var(--border-light); box-shadow: var(--shadow-md); }
         .mobile-nav.open { transform: translateY(0); }
-        @media (max-width: 880px) { .nav-links { display: none; } .menu-icon { display: block; } .hero-text h2 { font-size: 2.3rem; } .post-modal { padding: 28px; } }
+        .mobile-nav a { padding: 10px 0; font-weight: 500; border-bottom: 1px solid var(--border-light); }
+        
+        @media (max-width: 880px) { .nav-links { display: none; } .menu-icon { display: block; } .hero-text h2 { font-size: 2.3rem; } .post-modal { padding: 28px; } .post-modal h1 { font-size: 1.6rem; } }
+        @media (max-width: 680px) { .hero-grid { flex-direction: column; } .hero-visual { width: 100%; min-height: 240px; } .section { padding: 48px 0; } .newsletter { padding: 36px 24px; } }
     </style>
 </head>
 <body>
 
 <div class="trending-bar">
     <div class="ticker">
-        <span><i class="fas fa-fire"></i> TRENDING: MET GALA 2025 REVEALS</span>
-        <span><i class="fas fa-star"></i> BALENCIAGA COUTURE SHOCK</span>
-        <span><i class="fas fa-heart"></i> STYLEVERSE EDITORS' PICKS</span>
-        <span><i class="fas fa-globe"></i> SUSTAINABLE FASHION WEEK</span>
-        <span><i class="fas fa-fire"></i> TRENDING: AFRICAN AVANT-GARDE RISING</span>
+        <span><i class="fas fa-fire"></i> BREAKING: SAINT LAURENT CREATIVE DIRECTOR EXITS</span>
+        <span><i class="fas fa-star"></i> COPENHAGEN FASHION WEEK HIGHLIGHTS</span>
+        <span><i class="fas fa-heart"></i> STYLEVERSE EDITORS' PICKS: FALL 2025</span>
+        <span><i class="fas fa-globe"></i> SUSTAINABLE FASHION SUMMIT BEGINS</span>
+        <span><i class="fas fa-fire"></i> VIRAL: BALENCIAGA MUD SHOW SPARKS DEBATE</span>
     </div>
 </div>
 
@@ -184,10 +196,10 @@
 </header>
 
 <main>
-    <section class="hero" id="homeSection">
+    <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
-                <div class="badge">✦ LIVE FROM STYLEVERSE ✦</div>
+                <div class="badge">✦ EST. 2025 ✦</div>
                 <h2>Where fashion <br>meets the future.</h2>
                 <p>StyleVerse is your daily dose of avant-garde trends, timeless style, and the cultural moments shaping the fashion multiverse.</p>
                 <div><button class="btn" id="exploreBtn">Explore stories</button><button class="btn btn-outline" id="joinBtn">Join the verse</button></div>
@@ -198,7 +210,7 @@
 
     <div class="container section" id="blogSection">
         <h2 class="section-title">Latest from the Verse</h2>
-        <div class="section-sub">Iconic looks, emerging designers & insider edits</div>
+        <div class="section-sub">Iconic looks, emerging designers & insider edits — updated daily</div>
         <div class="blog-grid" id="blogGrid"></div>
     </div>
 
@@ -207,9 +219,9 @@
 
 <footer>
     <div class="container footer-grid">
-        <div class="footer-col"><h3 style="font-family:'Playfair Display';">STYLEVERSE</h3><p>Defining the new language of fashion. Bold, inclusive, visionary.</p><div class="social-icons"><a href="#" class="social-link" data-social="instagram"><i class="fab fa-instagram"></i></a><a href="#" class="social-link" data-social="twitter"><i class="fab fa-twitter"></i></a><a href="#" class="social-link" data-social="pinterest"><i class="fab fa-pinterest"></i></a></div></div>
-        <div class="footer-col"><h4>Explore</h4><p>Runway reports</p><p>Street style diaries</p><p>Sustainable futures</p></div>
-        <div class="footer-col"><h4>Info</h4><p>About us</p><p>Contact / PR</p><p>Terms & privacy</p></div>
+        <div class="footer-col"><h3 style="font-family:'Playfair Display';">STYLEVERSE</h3><p>Defining the new language of fashion. Bold, inclusive, visionary.</p><div class="social-icons"><a href="#" class="social-link" data-social="instagram"><i class="fab fa-instagram"></i></a><a href="#" class="social-link" data-social="twitter"><i class="fab fa-twitter"></i></a><a href="#" class="social-link" data-social="pinterest"><i class="fab fa-pinterest"></i></a><a href="#" class="social-link" data-social="tiktok"><i class="fab fa-tiktok"></i></a></div></div>
+        <div class="footer-col"><h4>Explore</h4><p>Runway reports</p><p>Street style diaries</p><p>Sustainable futures</p><p>Beauty & beyond</p></div>
+        <div class="footer-col"><h4>Info</h4><p>About us</p><p>Contact / PR</p><p>Advertise</p><p>Terms & privacy</p></div>
     </div>
     <div class="container" style="text-align: center; margin-top: 48px; font-size: 0.75rem; color: #7a6a5c;">© 2025 StyleVerse — all rights reserved. Fashion is an attitude.</div>
 </footer>
@@ -218,99 +230,282 @@
 <div id="toastMsg" class="toast-msg"></div>
 
 <script>
-    // Complete blog posts with FULL content and WORKING images
+    // ============================================
+    // BLOG POSTS DATA - All likes start at 0 (authentic!)
+    // TO ADD A NEW POST: Copy one of these objects, give it a unique ID,
+    // fill in your content, and add it to the postsData array below.
+    // ============================================
+    
+    const postsData = [
+        {
+            id: 1,
+            category: "RUNWAY",
+            title: "Paris Couture Week: The Ethereal Revival",
+            excerpt: "Sheer layers, sculptural silhouettes and a return to romanticism define the season as designers embrace lightness and movement.",
+            trend: "Haute couture",
+            img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format"
+        },
+        {
+            id: 2,
+            category: "STREET STYLE",
+            title: "Tokyo Street A/W: Layering as Art",
+            excerpt: "Harajuku meets minimalism — unexpected textures and monochromatic statements dominate Tokyo's fashion districts this season.",
+            trend: "Urban edge",
+            img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format"
+        },
+        {
+            id: 3,
+            category: "EDITORIAL",
+            title: "The Quiet Luxury Movement",
+            excerpt: "Why stealth wealth and investment pieces are taking over modern wardrobes in an era of conscious consumption.",
+            trend: "Timeless chic",
+            img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&auto=format"
+        },
+        {
+            id: 4,
+            category: "DESIGNER SPOTLIGHT",
+            title: "Emerging African Avant-Garde",
+            excerpt: "Designers reshaping global fashion with vibrant prints, radical tailoring, and centuries-old craftsmanship techniques.",
+            trend: "Cultural wave",
+            img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format"
+        },
+        {
+            id: 5,
+            category: "TREND REPORT",
+            title: "Metallic & Mesh: Club Renaissance",
+            excerpt: "From rave to red carpet — futuristic fabrics and Y2K revival collide in fashion's most exciting new aesthetic.",
+            trend: "Futuristic glam",
+            img: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&auto=format"
+        },
+        {
+            id: 6,
+            category: "ACCESSORIES",
+            title: "Bags to Invest in 2025",
+            excerpt: "Archival relaunches and indie leather goods that hold value while elevating every outfit in your rotation.",
+            trend: "Investment pieces",
+            img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format"
+        }
+    ];
+
+    // FULL POST CONTENT - Professional, expanded articles
     const fullPosts = {
         1: {
             title: "Paris Couture Week: The Ethereal Revival",
             category: "RUNWAY",
             date: "March 15, 2025",
+            readTime: "6 min read",
             image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format",
-            content: `<p>The streets of Paris were transformed into a dreamscape this season as designers embraced ethereal aesthetics and romantic silhouettes. From sheer organza overlays to sculptural florals, the Spring/Summer 2025 couture collections celebrated lightness and movement.</p>
+            content: `<p>The streets of Paris were transformed into a dreamscape this season as designers embraced ethereal aesthetics and romantic silhouettes. From sheer organza overlays to sculptural florals, the Spring/Summer 2025 couture collections celebrated lightness and movement in ways we haven't seen since the golden age of Galliano.</p>
+            
+            <div class="pull-quote">"Fashion is returning to its roots of fantasy and escape. After years of utilitarian dressing, clients are craving the extraordinary." — Sarah Mower, Vogue</div>
+            
             <h3>The Standout Shows</h3>
-            <p>Chanel reimagined the classic tweed suit with translucent layers and iridescent sequins, while Dior presented a collection inspired by celestial bodies — think midnight blue gowns with constellation embroidery. Valentino surprised everyone with an all-white collection that played with texture and shadow.</p>
+            <p><strong>Chanel</strong> reimagined the classic tweed suit with translucent layers and iridescent sequins, paying homage to Gabrielle "Coco" Chanel's original vision while pushing into futuristic territory. Creative Director Virginie Viard described the collection as "a bridge between past and future."</p>
+            
+            <p><strong>Dior</strong> presented a collection inspired by celestial bodies — think midnight blue gowns with constellation embroidery that seemed to glow under the runway lights. Maria Grazia Chiuri collaborated with female artists to create wearable art that celebrates femininity in all its forms.</p>
+            
+            <p><strong>Valentino</strong> surprised everyone with an all-white collection that played with texture and shadow. Pierpaolo Piccioli proved that color isn't necessary to make a statement — the interplay of matte and gloss, opaque and sheer created a mesmerizing visual symphony.</p>
+            
             <h3>Key Trends to Watch</h3>
-            <p>Expect to see sheer fabrics, cape-like silhouettes, and intricate beadwork dominating red carpets this year. Designers are moving away from structured corsetry toward fluid, almost liquid-like garments that move with the body.</p>
-            <p>Backstage, the buzz was all about sustainable couture — many houses showcased upcycled fabrics and deadstock materials, proving that luxury and ethics can coexist beautifully.</p>`
+            <ul>
+                <li><strong>Sheer Everything:</strong> From organza to tulle, transparency dominated the runways.</li>
+                <li><strong>Cape Silhouettes:</strong> Dramatic, flowing outer layers that add movement to any look.</li>
+                <li><strong>Intricate Beadwork:</strong> Hand-embroidered details that take hundreds of hours to complete.</li>
+                <li><strong>Sculptural Florals:</strong> 3D flowers that seem to grow from the garments themselves.</li>
+            </ul>
+            
+            <p>Backstage, the buzz was all about sustainable couture — many houses showcased upcycled fabrics and deadstock materials, proving that luxury and ethics can coexist beautifully. Schiaparelli used exclusively repurposed materials for their entire collection, setting a new standard for responsible haute couture.</p>
+            
+            <h3>What This Means for Your Wardrobe</h3>
+            <p>While couture may seem distant from everyday dressing, the silhouettes and textures eventually trickle down to ready-to-wear. Look for sheer layering pieces, flowing capes, and romantic details in upcoming seasonal collections. The message is clear: fashion should be joyful, expressive, and unapologetically beautiful.</p>`
         },
         2: {
             title: "Tokyo Street A/W: Layering as Art",
             category: "STREET STYLE",
             date: "March 10, 2025",
+            readTime: "5 min read",
             image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format",
             content: `<p>Tokyo's fashion districts have always been laboratories of style, and this Autumn/Winter season is no exception. The streets of Harajuku, Shibuya, and Shimokitazawa are showcasing a fascinating evolution of layering techniques that blur the lines between art and fashion.</p>
+            
+            <div class="pull-quote">"Tokyo street style isn't about following rules — it's about creating your own visual language." — Yohji Yamamoto</div>
+            
             <h3>The Art of Layering</h3>
             <p>Forget the traditional coat-over-shirt formula. Tokyo's fashion crowd is experimenting with asymmetrical layering — sheer mesh over knitwear, kimono-inspired outer layers paired with tailored trousers, and unexpected textile combinations like wool with silk and leather with lace.</p>
+            
+            <h4>The Five-Layer Rule</h4>
+            <p>Local stylists have coined the "five-layer rule" — not necessarily five garments, but five distinct visual elements that create depth and interest. This might include a base layer, a mid-layer with texture, a statement outer piece, unexpected accessories, and a pop of color or pattern that ties everything together.</p>
+            
             <h3>Color Stories</h3>
-            <p>While monochromatic looks remain popular, this season introduces "controlled chaos" — intentional clashing of patterns and colors. Earth tones are juxtaposed with neon accents, creating visual tension that somehow works perfectly.</p>
-            <p>Accessories play a crucial role: chunky platform boots, oversized tote bags, and statement eyewear complete these architectural outfits.</p>`
+            <p>While monochromatic looks remain popular, this season introduces "controlled chaos" — intentional clashing of patterns and colors. Earth tones are juxtaposed with neon accents, creating visual tension that somehow works perfectly. The key is balance: one bold element anchors the chaos.</p>
+            
+            <h3>Accessories That Define</h3>
+            <ul>
+                <li><strong>Chunky Platform Boots:</strong> The bigger, the better — they ground even the most whimsical outfits.</li>
+                <li><strong>Oversized Tote Bags:</strong> Function meets fashion with bags that can carry everything (and make a statement).</li>
+                <li><strong>Statement Eyewear:</strong> From tiny Y2K shades to exaggerated architectural frames.</li>
+                <li><strong>Vintage Finds:</strong> One-of-a-kind pieces that add authenticity to any look.</li>
+            </ul>
+            
+            <h3>Where to Shop in Tokyo</h3>
+            <p>For those inspired to embrace Tokyo layering, head to Shimokitazawa's vintage district for unique finds, Harajuku's Cat Street for emerging designers, and Shibuya's department stores for the latest collections. The true Tokyo shopping experience is about discovery — take your time and let the city guide you.</p>`
         },
         3: {
             title: "The Quiet Luxury Movement",
             category: "EDITORIAL",
             date: "March 5, 2025",
+            readTime: "7 min read",
             image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format",
-            content: `<p>In an era of logomania fatigue, a new aesthetic has emerged: quiet luxury. Also known as "stealth wealth," this movement prioritizes impeccable quality, timeless design, and subtle sophistication over flashy branding.</p>
+            content: `<p>In an era of logomania fatigue, a new aesthetic has emerged: quiet luxury. Also known as "stealth wealth," this movement prioritizes impeccable quality, timeless design, and subtle sophistication over flashy branding. It's a reaction to the excess of the 2010s and a embrace of mindful consumption.</p>
+            
+            <div class="pull-quote">"Luxury is in each detail. When something is truly well-made, it doesn't need a logo to announce its worth." — Hubert de Givenchy</div>
+            
             <h3>What Defines Quiet Luxury?</h3>
-            <p>Think The Row, Loro Piana, Brunello Cucinelli — brands that whisper rather than shout. It's about exceptional fabrics (cashmere, vicuña, silk), flawless construction, and designs that transcend seasonal trends. The focus is on how clothes make you feel, not how they look in a selfie.</p>
-            <h3>Investment Pieces</h3>
-            <p>StyleVerse recommends building your quiet luxury wardrobe with a perfectly tailored blazer, wide-leg trousers in neutral tones, a cashmere sweater that feels like butter, and leather goods that will age beautifully. These are pieces you'll wear for decades, not just one season.</p>
-            <p>The movement also aligns with sustainability — buying fewer, better things reduces fashion's environmental impact while elevating personal style.</p>`
+            <p>Think The Row, Loro Piana, Brunello Cucinelli, and Zegna — brands that whisper rather than shout. It's about exceptional fabrics (cashmere, vicuña, silk, the finest wools), flawless construction, and designs that transcend seasonal trends. The focus is on how clothes make you feel, not how they look in a selfie.</p>
+            
+            <h4>The Psychology Behind the Movement</h4>
+            <p>Fashion psychologist Dr. Carolyn Mair explains: "Quiet luxury appeals to those who have nothing to prove. It's confidence manifested through restraint. These pieces signal insider knowledge — you understand quality in ways that aren't immediately obvious to the untrained eye."</p>
+            
+            <h3>Investment Pieces Worth Every Penny</h3>
+            <p>StyleVerse recommends building your quiet luxury wardrobe with these cornerstone pieces:</p>
+            <ul>
+                <li><strong>The Perfect Blazer:</strong> Look for natural shoulders, quality lining, and fabric with structure and drape.</li>
+                <li><strong>Wide-Leg Trousers:</strong> In neutral tones like cream, charcoal, or navy — the foundation of effortless elegance.</li>
+                <li><strong>A Cashmere Sweater:</strong> Invest in the highest ply you can afford. It will last decades with proper care.</li>
+                <li><strong>Leather Goods:</strong> Simple, unbranded bags and belts that will develop a beautiful patina over time.</li>
+                <li><strong>Quality Footwear:</strong> Leather loafers, minimalist boots, and simple sandals from heritage shoemakers.</li>
+            </ul>
+            
+            <h3>The Sustainability Connection</h3>
+            <p>The quiet luxury movement aligns perfectly with sustainable fashion principles. Buying fewer, better things reduces fashion's environmental impact while elevating personal style. These pieces aren't designed for a single season — they're meant to be worn, loved, and eventually passed down.</p>
+            
+            <h3>How to Spot Quality</h3>
+            <p>Look for: reinforced seams, natural fibers, mother-of-pearl buttons, aligned patterns, and weight that feels substantial without being heavy. These details separate true investment pieces from overpriced fast fashion.</p>`
         },
         4: {
             title: "Emerging African Avant-Garde",
             category: "DESIGNER SPOTLIGHT",
             date: "February 28, 2025",
+            readTime: "8 min read",
             image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format",
-            content: `<p>African fashion is having a global moment, and a new generation of designers is leading the charge. From Lagos to Marrakech, creative directors are reimagining traditional textiles and silhouettes for the contemporary world.</p>
+            content: `<p>African fashion is having a global moment, and a new generation of designers is leading the charge. From Lagos to Marrakech, from Accra to Johannesburg, creative directors are reimagining traditional textiles and silhouettes for the contemporary world — and the industry is finally paying attention.</p>
+            
+            <div class="pull-quote">"African fashion is not a trend. It is a movement that has been building for decades, and now the world is ready to listen." — Edward Enninful, former Editor-in-Chief of British Vogue</div>
+            
             <h3>Designers to Watch</h3>
-            <p><strong>Kenneth Ize (Nigeria)</strong> continues to elevate the aso-oke fabric to luxury heights, while <strong>Thebe Magugu (South Africa)</strong> blends archival research with modern tailoring. <strong>Loza Maléombho (Ivory Coast)</strong> creates futuristic silhouettes inspired by ancestral warrior aesthetics.</p>
+            <p><strong>Kenneth Ize (Nigeria):</strong> The Lagos-based designer continues to elevate aso-oke fabric — a handwoven textile traditionally used for ceremonial garments — to luxury heights. His collaborations with Karl Lagerfeld and appearances at Paris Fashion Week have cemented his status as a global force.</p>
+            
+            <p><strong>Thebe Magugu (South Africa):</strong> The LVMH Prize winner blends archival research with modern tailoring, creating collections that tell stories about South African history and contemporary life. Each garment comes with extensive documentation — look books that read like academic journals.</p>
+            
+            <p><strong>Loza Maléombho (Ivory Coast):</strong> Based between Abidjan and New York, Maléombho creates futuristic silhouettes inspired by ancestral warrior aesthetics. Her work has been worn by Beyoncé, Lupita Nyong'o, and Michelle Obama.</p>
+            
+            <p><strong>Moshions (Rwanda):</strong> Designer Moses Turahirwa incorporates traditional Rwandan motifs into streetwear-inspired silhouettes, bridging the gap between heritage and contemporary cool.</p>
+            
             <h3>Textile Renaissance</h3>
-            <p>Indigenous fabrics like kente, mudcloth, and shweshwe are being reinterpreted for global audiences. Designers are preserving traditional weaving techniques while introducing contemporary cuts and unexpected color combinations.</p>
-            <p>Fashion insiders predict African avant-garde will dominate the next decade of global style. The continent's creative energy is undeniable, and the world is finally paying attention.</p>
-            <h3>Cultural Impact</h3>
-            <p>This movement isn't just about aesthetics — it's about economic empowerment and cultural preservation. By investing in African designers, fashion enthusiasts support local artisans and centuries-old craftsmanship traditions.</p>`
+            <p>Indigenous fabrics like kente (Ghana), mudcloth (Mali), shweshwe (South Africa), and kitenge (East Africa) are being reinterpreted for global audiences. Designers are preserving traditional weaving techniques while introducing contemporary cuts and unexpected color combinations.</p>
+            
+            <h4>Preserving Craftsmanship</h4>
+            <p>Many of these designers work directly with artisan communities, ensuring fair wages and preserving techniques that have been passed down for generations. This ethical approach to fashion production is gaining attention from conscious consumers worldwide.</p>
+            
+            <h3>The Economic Impact</h3>
+            <p>According to the African Development Bank, the continent's fashion industry could be worth $15.5 billion by 2025. Investment in local manufacturing, textile production, and design education is creating jobs and economic opportunities across the continent.</p>
+            
+            <h3>Where to Buy</h3>
+            <p>Many African designers now ship internationally through their websites. Platforms like Industrie Africa and The Folklore are also making these collections accessible to global audiences. Fashion insiders predict African avant-garde will dominate the next decade of global style — get ahead of the curve now.</p>`
         },
         5: {
             title: "Metallic & Mesh: Club Renaissance",
             category: "TREND REPORT",
             date: "February 20, 2025",
+            readTime: "5 min read",
             image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&auto=format",
-            content: `<p>The Y2K revival has evolved into something entirely new: Club Renaissance. This aesthetic draws from early 2000s rave culture but updates it with luxury fabrics and sophisticated silhouettes.</p>
-            <h3>The Fabrics</h3>
-            <p>Metallic lamé, holographic vinyl, fishnet mesh, and liquid sequins are everywhere — from the runways of Mugler and Blumarine to the streets of London and New York. The key is mixing these attention-grabbing materials with structured pieces for balance.</p>
+            content: `<p>The Y2K revival has evolved into something entirely new: Club Renaissance. This aesthetic draws from early 2000s rave culture but updates it with luxury fabrics, sophisticated silhouettes, and a distinctly modern attitude.</p>
+            
+            <div class="pull-quote">"Club Renaissance isn't nostalgia — it's reclamation. We're taking the energy of the past and making it our own." — Rachel Tashjian, fashion critic</div>
+            
+            <h3>The Fabrics That Define the Trend</h3>
+            <p>Metallic lamé, holographic vinyl, fishnet mesh, liquid sequins, and iridescent finishes are everywhere — from the runways of Mugler, Blumarine, and Paco Rabanne to the streets of London, New York, and Berlin. The key is mixing these attention-grabbing materials with structured pieces for balance.</p>
+            
             <h3>How to Wear It</h3>
-            <p>Start small: a metallic skirt with a simple cashmere sweater, or mesh sleeves under a blazer. For the bold, head-to-toe shine is making a comeback (yes, like the disco era but futuristic). Footwear ranges from chunky platform boots to strappy metallic heels.</p>
-            <p>Celebrities like Dua Lipa and Rosalía have embraced this trend, proving that clubwear can be red-carpet ready.</p>`
+            <p><strong>Start Small:</strong> A metallic skirt with a simple cashmere sweater creates the perfect day-to-night transition. Mesh sleeves under a blazer add intrigue without overwhelming.</p>
+            
+            <p><strong>Go Bold:</strong> For the fashion-forward, head-to-toe shine is making a comeback (yes, like the disco era but distinctly futuristic). Think silver trousers with a matching metallic top, or an iridescent dress that shifts color as you move.</p>
+            
+            <p><strong>Footwear Matters:</strong> Chunky platform boots (think Buffalo London or Demonia) ground even the most whimsical looks. Strappy metallic heels or crystal-embellished mules add glamour for evening events.</p>
+            
+            <h3>Celebrity Endorsement</h3>
+            <p>Dua Lipa, Rosalía, and Doja Cat have embraced this trend, proving that clubwear can be red-carpet ready. Beyoncé's Renaissance World Tour elevated the aesthetic to stadium-filling proportions, with custom looks from Mugler, Loewe, and Balmain.</p>
+            
+            <h3>The Makeup Connection</h3>
+            <p>The beauty counterpart to this trend is equally bold: glitter graphic eyeliner, glossy lips, and skin so dewy it looks wet. Brands like Pat McGrath Labs and Half Magic are leading the charge with products designed for maximum impact.</p>
+            
+            <h3>Where to Shop</h3>
+            <p>Look to Mugler (now under creative director Casey Cadwallader), Nensi Dojaka for mesh pieces, and emerging brands like Poster Girl and Sinead Gorey for club-ready looks. Vintage stores are also treasure troves for authentic Y2K metallic pieces.</p>`
         },
         6: {
             title: "Bags to Invest in 2025",
             category: "ACCESSORIES",
             date: "February 15, 2025",
+            readTime: "6 min read",
             image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&auto=format",
-            content: `<p>Handbag trends come and go, but some pieces are worth the investment. StyleVerse's editors have identified the bags that will retain (or increase) value while elevating every outfit.</p>
+            content: `<p>Handbag trends come and go, but some pieces are worth the investment. StyleVerse's editors have identified the bags that will retain (or increase) value while elevating every outfit in your rotation. Whether you're a collector or a first-time luxury buyer, these picks offer both style and financial wisdom.</p>
+            
+            <div class="pull-quote">"A great bag is an investment in yourself. It carries your life and your confidence." — Anna Wintour</div>
+            
             <h3>Top Investment Picks</h3>
-            <p>Hermès Kelly and Birkin remain the gold standard, but rising stars include The Row's Margaux bag, Bottega Veneta's Cabat, and Loewe's Puzzle bag. These pieces combine exceptional craftsmanship with timeless design.</p>
-            <h3>Emerging Brands</h3>
-            <p>Look to indie labels like Polène, Manu Atelier, and Wandler for quality leather goods at accessible price points. Their designs are distinctive without being trendy, making them future classics.</p>
-            <p>Pro tip: Neutral colors (black, tan, chocolate brown) have better resale value than seasonal shades. And always keep dust bags and authenticity cards — they matter for resale.</p>`
+            <p><strong>Hermès Kelly and Birkin</strong> remain the gold standard of bag investment, with some styles appreciating faster than gold or stocks. The waiting lists remain years long for a reason.</p>
+            
+            <p><strong>The Row's Margaux bag</strong> has become the quiet luxury icon of the decade. Understated, impeccably crafted, and already holding strong resale value.</p>
+            
+            <p><strong>Bottega Veneta's Cabat</strong> — the woven leather tote that takes two days for a single artisan to complete. No logos, no hardware — just exceptional craftsmanship that speaks for itself.</p>
+            
+            <p><strong>Loewe's Puzzle bag</strong> has proven its staying power. Jonathan Anderson's geometric design has become a modern classic since its 2015 debut.</p>
+            
+            <h3>Emerging Brands Worth Watching</h3>
+            <p>Look to indie labels for quality leather goods at accessible price points with serious potential for appreciation:</p>
+            <ul>
+                <li><strong>Polène (Paris):</strong> Architectural designs with exceptional leather quality at a fraction of heritage house prices.</li>
+                <li><strong>Manu Atelier (Istanbul):</strong> Handcrafted bags with distinctive arrow logo and cult following.</li>
+                <li><strong>Wandler (Amsterdam):</strong> Clean lines, beautiful colors, and impeccable construction.</li>
+                <li><strong>DeMellier (London):</strong> Each bag funds a vaccine for a child in need — fashion with purpose.</li>
+            </ul>
+            
+            <h3>What to Look For</h3>
+            <p><strong>Pro tip #1:</strong> Neutral colors (black, tan, chocolate brown, navy) have better resale value than seasonal shades. They work across seasons and years.</p>
+            
+            <p><strong>Pro tip #2:</strong> Always keep dust bags, authenticity cards, and original packaging. These items can increase resale value by 20-30%.</p>
+            
+            <p><strong>Pro tip #3:</strong> Limited editions and collaborations often appreciate faster than core collection pieces. Watch for announcements from brands like Louis Vuitton's artist collaborations or Dior's annual cruise collections.</p>
+            
+            <h3>Care Tips for Longevity</h3>
+            <p>Store bags stuffed with acid-free paper, avoid direct sunlight, and consider professional cleaning every few years. A well-maintained bag can last decades — and become a family heirloom.</p>`
         }
     };
 
+    // Initialize likes storage (all start at 0 - authentic!)
     let likesData = {};
-    function loadLikes() { const stored = localStorage.getItem("styleverse_likes"); if(stored) { likesData = JSON.parse(stored); } else { postsData.forEach(p => { likesData[p.id] = p.likes; }); } }
+    function initLikes() {
+        const stored = localStorage.getItem("styleverse_likes");
+        if(stored) {
+            likesData = JSON.parse(stored);
+        } else {
+            postsData.forEach(p => { likesData[p.id] = 0; }); // All start at 0!
+        }
+        saveLikes();
+    }
     function saveLikes() { localStorage.setItem("styleverse_likes", JSON.stringify(likesData)); }
-    
-    const postsData = [
-        { id: 1, category: "RUNWAY", title: "Paris Couture Week: The Ethereal Revival", excerpt: "Sheer layers, sculptural silhouettes and a return to romanticism define the season.", trend: "Haute couture", likes: 124, img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format" },
-        { id: 2, category: "STREET STYLE", title: "Tokyo Street A/W: Layering as Art", excerpt: "Harajuku meets minimalism — unexpected textures and monochromatic statements.", trend: "Urban edge", likes: 89, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format" },
-        { id: 3, category: "EDITORIAL", title: "The Quiet Luxury Movement", excerpt: "Why stealth wealth and investment pieces are taking over modern wardrobes.", trend: "Timeless chic", likes: 215, img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&auto=format" },
-        { id: 4, category: "DESIGNER SPOTLIGHT", title: "Emerging African Avant-Garde", excerpt: "Designers reshaping global fashion with vibrant prints and radical tailoring.", trend: "Cultural wave", likes: 67, img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format" },
-        { id: 5, category: "TREND REPORT", title: "Metallic & Mesh: Club Renaissance", excerpt: "From rave to red carpet — futuristic fabrics are taking over nightlife & beyond.", trend: "Futuristic glam", likes: 143, img: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&auto=format" },
-        { id: 6, category: "ACCESSORIES", title: "Bags to Invest in 2025", excerpt: "Archival relaunches and indie leather goods that hold value and style.", trend: "Investment pieces", likes: 98, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format" }
-    ];
 
-    function showToast(message) { const toast = document.getElementById("toastMsg"); toast.textContent = message; toast.style.opacity = "1"; setTimeout(() => { toast.style.opacity = "0"; }, 2500); }
-    function trackEvent(category, action, label) { if(typeof gtag !== 'undefined') { gtag('event', action, { 'event_category': category, 'event_label': label }); } console.log(`GA: ${category}/${action}/${label}`); }
+    function showToast(message) { 
+        const toast = document.getElementById("toastMsg"); 
+        toast.textContent = message; 
+        toast.style.opacity = "1"; 
+        setTimeout(() => { toast.style.opacity = "0"; }, 2500); 
+    }
+    
+    function trackEvent(category, action, label) { 
+        if(typeof gtag !== 'undefined') { 
+            gtag('event', action, { 'event_category': category, 'event_label': label }); 
+        }
+    }
 
     function openPost(postId) {
         const post = fullPosts[postId];
@@ -319,11 +514,15 @@
         const modalContent = document.getElementById("modalContent");
         modalContent.innerHTML = `
             <img src="${post.image}" alt="${post.title}" style="width:100%; border-radius:24px; margin-bottom:20px;" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&auto=format'">
-            <div class="post-meta">${post.category} • ${post.date}</div>
+            <div class="post-meta">
+                <span><i class="fas fa-tag"></i> ${post.category}</span>
+                <span><i class="far fa-calendar"></i> ${post.date}</span>
+                <span><i class="far fa-clock"></i> ${post.readTime}</span>
+            </div>
             <h1>${post.title}</h1>
             <div class="post-content">${post.content}</div>
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0e4da;">
-                <button class="btn" id="closeModalBtn" style="background: var(--accent);">Close</button>
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0e4da; display: flex; gap: 16px;">
+                <button class="btn" id="closeModalBtn" style="background: var(--accent);">Close Article</button>
             </div>
         `;
         modal.style.display = "flex";
@@ -341,31 +540,76 @@
         if(filterCategory === "home") filtered = postsData;
         grid.innerHTML = "";
         filtered.forEach(post => {
-            const currentLikes = likesData[post.id] !== undefined ? likesData[post.id] : post.likes;
+            const currentLikes = likesData[post.id] || 0;
             const card = document.createElement("div");
             card.className = "post-card";
             card.innerHTML = `
                 <div class="card-img" style="background-image: url('${post.img}'); background-size: cover; background-position: center;"></div>
                 <div class="card-content">
-                    <div class="card-category">${post.category}</div>
+                    <span class="card-category">${post.category}</span>
                     <h3>${post.title}</h3>
                     <p>${post.excerpt}</p>
                     <div class="post-footer">
-                        <button class="like-btn" data-id="${post.id}"><i class="far fa-heart"></i> <span class="like-count">${currentLikes}</span></button>
-                        <span class="trend-tag"><i class="fas fa-tag"></i> ${post.trend}</span>
+                        <button class="like-btn" data-id="${post.id}">
+                            <i class="far fa-heart"></i> <span class="like-count">${currentLikes}</span>
+                        </button>
+                        <span class="trend-tag"><i class="fas fa-chart-line"></i> ${post.trend}</span>
                     </div>
                     <div class="read-more" data-id="${post.id}">Read full story <i class="fas fa-arrow-right"></i></div>
                 </div>
             `;
             grid.appendChild(card);
         });
-        document.querySelectorAll(".like-btn").forEach(btn => { btn.addEventListener("click", (e) => { e.stopPropagation(); const id = parseInt(btn.getAttribute("data-id")); if(likesData[id] === undefined) likesData[id] = postsData.find(p=>p.id===id)?.likes || 0; likesData[id]++; saveLikes(); btn.querySelector(".like-count").innerText = likesData[id]; btn.classList.add("liked"); btn.querySelector("i").classList.remove("far"); btn.querySelector("i").classList.add("fas"); showToast(`❤️ You loved "${postsData.find(p=>p.id===id)?.title}"!`); trackEvent("Engagement", "Like", `post_${id}`); }); });
-        document.querySelectorAll(".read-more").forEach(el => { el.addEventListener("click", (e) => { e.stopPropagation(); const id = parseInt(el.getAttribute("data-id")); openPost(id); }); });
-        document.querySelectorAll(".post-card").forEach(card => { card.addEventListener("click", (e) => { if(!e.target.closest(".like-btn") && !e.target.closest(".read-more")) { const id = parseInt(card.querySelector(".read-more")?.getAttribute("data-id")); if(id) openPost(id); } }); });
+        
+        document.querySelectorAll(".like-btn").forEach(btn => { 
+            btn.addEventListener("click", (e) => { 
+                e.stopPropagation(); 
+                const id = parseInt(btn.getAttribute("data-id")); 
+                likesData[id] = (likesData[id] || 0) + 1; 
+                saveLikes(); 
+                const countSpan = btn.querySelector(".like-count");
+                if(countSpan) countSpan.innerText = likesData[id];
+                btn.classList.add("liked");
+                const icon = btn.querySelector("i");
+                icon.classList.remove("far");
+                icon.classList.add("fas");
+                showToast(`❤️ You loved "${postsData.find(p=>p.id===id)?.title}"!`);
+                trackEvent("Engagement", "Like", `post_${id}`);
+            }); 
+        });
+        
+        document.querySelectorAll(".read-more").forEach(el => { 
+            el.addEventListener("click", (e) => { 
+                e.stopPropagation(); 
+                const id = parseInt(el.getAttribute("data-id")); 
+                openPost(id); 
+            }); 
+        });
+        
+        document.querySelectorAll(".post-card").forEach(card => { 
+            card.addEventListener("click", (e) => { 
+                if(!e.target.closest(".like-btn") && !e.target.closest(".read-more")) { 
+                    const id = parseInt(card.querySelector(".read-more")?.getAttribute("data-id")); 
+                    if(id) openPost(id); 
+                } 
+            }); 
+        });
     }
 
     function initNavigation() {
-        document.querySelectorAll("[data-nav]").forEach(item => { item.addEventListener("click", () => { const section = item.getAttribute("data-nav"); if(section === "home") renderBlog("home"); else if(section === "runway") renderBlog("runway"); else if(section === "editorial") renderBlog("editorial"); else if(section === "street") renderBlog("street"); else if(section === "magazine") { renderBlog("home"); showToast("Magazine coming soon!"); } else renderBlog("home"); document.getElementById("blogSection")?.scrollIntoView({ behavior: "smooth" }); document.getElementById("mobileMenu")?.classList.remove("open"); }); });
+        document.querySelectorAll("[data-nav]").forEach(item => { 
+            item.addEventListener("click", () => { 
+                const section = item.getAttribute("data-nav"); 
+                if(section === "home") renderBlog("home");
+                else if(section === "runway") renderBlog("runway");
+                else if(section === "editorial") renderBlog("editorial");
+                else if(section === "street") renderBlog("street");
+                else if(section === "magazine") { renderBlog("home"); showToast("Magazine section coming soon!"); }
+                else renderBlog("home");
+                document.getElementById("blogSection")?.scrollIntoView({ behavior: "smooth" });
+                document.getElementById("mobileMenu")?.classList.remove("open");
+            }); 
+        });
         document.getElementById("logoHome")?.addEventListener("click", () => renderBlog("home"));
         document.getElementById("exploreBtn")?.addEventListener("click", () => { renderBlog("home"); document.getElementById("blogSection")?.scrollIntoView({ behavior: "smooth" }); });
         document.getElementById("joinBtn")?.addEventListener("click", () => { document.querySelector(".newsletter")?.scrollIntoView({ behavior: "smooth" }); });
@@ -384,14 +628,36 @@
     function initMobileMenu() {
         const toggle = document.getElementById("menuToggle");
         const mobileMenu = document.getElementById("mobileMenu");
-        toggle.addEventListener("click", () => { mobileMenu.classList.toggle("open"); const icon = toggle.querySelector("i"); if(mobileMenu.classList.contains("open")) { icon.classList.remove("fa-bars"); icon.classList.add("fa-times"); } else { icon.classList.remove("fa-times"); icon.classList.add("fa-bars"); } });
-        mobileMenu.querySelectorAll("a").forEach(link => { link.addEventListener("click", () => { mobileMenu.classList.remove("open"); const icon = toggle.querySelector("i"); icon.classList.remove("fa-times"); icon.classList.add("fa-bars"); }); });
+        toggle.addEventListener("click", () => { 
+            mobileMenu.classList.toggle("open"); 
+            const icon = toggle.querySelector("i"); 
+            if(mobileMenu.classList.contains("open")) { 
+                icon.classList.remove("fa-bars"); 
+                icon.classList.add("fa-times"); 
+            } else { 
+                icon.classList.remove("fa-times"); 
+                icon.classList.add("fa-bars"); 
+            } 
+        });
+        mobileMenu.querySelectorAll("a").forEach(link => { 
+            link.addEventListener("click", () => { 
+                mobileMenu.classList.remove("open"); 
+                const icon = toggle.querySelector("i"); 
+                icon.classList.remove("fa-times"); 
+                icon.classList.add("fa-bars"); 
+            }); 
+        });
     }
 
     document.querySelector(".close-modal")?.addEventListener("click", closeModal);
     window.addEventListener("click", (e) => { if(e.target === document.getElementById("postModal")) closeModal(); });
 
-    loadLikes(); renderBlog("home"); initNavigation(); setupNewsletter(); initMobileMenu(); showToast("✨ Welcome to StyleVerse — click any post to read full articles!");
+    initLikes();
+    renderBlog("home");
+    initNavigation();
+    setupNewsletter();
+    initMobileMenu();
+    showToast("✨ Welcome to StyleVerse — authentic fashion journalism. Click any post to read!");
 </script>
 </body>
 </html>
