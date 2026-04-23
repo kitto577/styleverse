@@ -4,27 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>StyleVerse | Where Fashion Finds Its Edge</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Premium fashion blog featuring runway trends, street style, and designer spotlights. Daily fashion insights from global fashion capitals.">
+    <meta name="keywords" content="fashion blog, style trends, runway fashion, street style, luxury fashion, sustainable fashion">
+    <meta name="author" content="StyleVerse">
+    <meta name="robots" content="index, follow">
     
-    <!-- Google Analytics (gtag.js) - Replace G-XXXXXXXXXX with your actual Measurement ID -->
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="StyleVerse | Fashion Blog">
+    <meta property="og:description" content="Daily fashion insights from global fashion capitals.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format">
+    
+    <!-- Google Analytics - REPLACE G-XXXXXXXXXX WITH YOUR REAL MEASUREMENT ID -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QK2BD4J3NX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-QK2BD4J3NX');
+        console.log("Google Analytics initialized");
     </script>
     
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #fefaf5;
-            color: #1e1e2a;
-            scroll-behavior: smooth;
-            line-height: 1.5;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
         :root {
             --accent: #c47a5a;
             --accent-dark: #a55d3f;
@@ -35,629 +46,1852 @@
             --border-light: #f0e4da;
             --shadow-sm: 0 12px 28px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.02);
             --shadow-md: 0 20px 30px -12px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
         }
-        a { text-decoration: none; color: inherit; cursor: pointer; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
         
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode {
+            --bg-light: #1a1a2e;
+            --bg-card: #16213e;
+            --text-dark: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-light: #2a2a4a;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        
+        a { text-decoration: none; color: inherit; }
+        
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 99;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Header */
         .site-header {
             background: rgba(254, 250, 245, 0.96);
             backdrop-filter: blur(8px);
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 100;
             border-bottom: 1px solid var(--border-light);
             padding: 18px 0;
         }
+        
+        body.dark-mode .site-header {
+            background: rgba(26, 26, 46, 0.96);
+        }
+        
         .header-inner {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
         }
+        
         .logo h1 {
             font-family: 'Playfair Display', serif;
             font-size: 1.9rem;
             font-weight: 600;
-            background: linear-gradient(135deg, #2c2c3a, #a55d3f);
+            background: linear-gradient(135deg, #2c2c3a, #c47a5a);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             cursor: pointer;
         }
-        .logo span { font-size: 0.75rem; font-weight: 400; color: var(--accent); display: block; margin-top: -6px; }
-        .nav-links { display: flex; gap: 32px; font-weight: 500; }
-        .nav-links a { cursor: pointer; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
-        .menu-icon { display: none; font-size: 1.7rem; cursor: pointer; }
         
-        .hero {
-            background: linear-gradient(97deg, #f8efe7 0%, #fff4ec 100%);
-            padding: 64px 0 80px;
+        .logo span {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--accent);
+            display: block;
+            margin-top: -6px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+        
+        .nav-links a {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: var(--accent); }
+        
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .search-toggle, .menu-icon {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            padding: 8px;
+        }
+        
+        .menu-icon { display: none; }
+        
+        /* Search Bar */
+        .search-bar {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            padding: 20px 0;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            z-index: 99;
+        }
+        
+        .search-bar.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 60px;
+            font-size: 1rem;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-radius: 16px;
+            margin-top: 8px;
+            box-shadow: var(--shadow-md);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+        }
+        
+        .search-result-item:hover { background: var(--bg-light); }
+        
+        .search-result-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        /* Mobile Nav */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 99;
+            transform: translateY(-120%);
+            transition: transform 0.3s;
             border-bottom: 1px solid var(--border-light);
         }
-        .hero-grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px; }
-        .hero-text { flex: 1.2; }
-        .hero-text .badge { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 600; }
-        .hero-text h2 { font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.2; margin: 16px 0 20px; font-weight: 500; }
-        .hero-text p { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin-bottom: 32px; }
-        .btn {
-            display: inline-block; background: var(--accent); color: white; padding: 12px 28px;
-            border-radius: 40px; font-weight: 600; transition: all 0.25s; border: none; cursor: pointer;
-        }
-        .btn-outline { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); margin-left: 12px; }
-        .btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
-        .hero-visual { flex: 1; border-radius: 28px; min-height: 300px; background-size: cover; background-position: 60% 30%; box-shadow: var(--shadow-md); }
         
-        .section { padding: 72px 0; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; margin-bottom: 12px; }
-        .section-sub { color: var(--text-muted); margin-bottom: 48px; border-left: 3px solid var(--accent); padding-left: 16px; }
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px; }
-        .post-card {
-            background: var(--bg-card); border-radius: 24px; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.3s;
-            box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); cursor: pointer;
-        }
-        .post-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-        .card-img { height: 240px; background-size: cover; background-position: center; }
-        .card-content { padding: 24px; }
-        .card-category { 
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600;
-            display: inline-block; padding: 4px 12px; background: #f8efe7; border-radius: 50px;
-        }
-        .card-content h3 { font-size: 1.4rem; margin: 12px 0 12px; font-weight: 600; line-height: 1.3; }
-        .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6; }
-        .read-more {
-            font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px;
-            transition: gap 0.2s; cursor: pointer; margin-top: 8px;
-        }
-        .read-more:hover { gap: 12px; }
-        .post-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; border-top: 1px solid var(--border-light); padding-top: 14px; }
-        .like-btn {
-            background: none; border: none; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
-            color: var(--text-muted); cursor: pointer; font-weight: 500; transition: all 0.2s;
-            padding: 6px 12px; border-radius: 40px;
-        }
-        .like-btn:hover { background: #f8efe7; }
-        .like-btn.liked { color: #e25555; }
-        .like-btn.liked i { animation: heartPop 0.3s ease; }
-        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
-        .trend-tag { font-size: 0.7rem; background: #f0e4da; padding: 4px 12px; border-radius: 50px; color: var(--accent-dark); }
+        .mobile-nav.open { transform: translateY(0); }
         
-        .trending-bar { background: #1e1e2a; color: #f0e4da; padding: 8px 0; overflow: hidden; white-space: nowrap; }
-        .ticker { display: inline-block; animation: tickerScroll 22s linear infinite; }
+        /* Trending Bar */
+        .trending-bar {
+            background: #1e1e2a;
+            color: #f0e4da;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 70px;
+        }
+        
+        .ticker {
+            display: inline-block;
+            animation: tickerScroll 22s linear infinite;
+        }
+        
         .ticker span { margin-right: 40px; }
-        @keyframes tickerScroll { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
-        .newsletter { background: #2c2c3a; color: white; border-radius: 40px; padding: 56px 48px; text-align: center; margin: 32px 0 24px; }
-        .news-form { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 500px; margin: 0 auto; }
-        .news-form input { flex: 1; padding: 14px 20px; border-radius: 60px; border: none; outline: none; font-size: 1rem; }
-        .news-form button { background: var(--accent); border: none; padding: 14px 28px; border-radius: 60px; font-weight: 600; color: white; cursor: pointer; transition: 0.2s; }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(97deg, #f8efe7 0%, #fff4ec 100%);
+            padding: 80px 0;
+        }
+        
+        body.dark-mode .hero {
+            background: linear-gradient(97deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+        }
+        
+        .hero-text { flex: 1.2; }
+        
+        .hero-text .badge {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .hero-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin: 16px 0 20px;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 32px;
+        }
+        
+        .hero-visual {
+            flex: 1;
+            border-radius: 28px;
+            min-height: 350px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            margin-left: 12px;
+        }
+        
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Categories Section */
+        .categories-section { padding: 60px 0; }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .section-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        
+        .category-card {
+            padding: 40px 24px;
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover { transform: translateY(-5px); }
+        .category-card i { font-size: 2.5rem; margin-bottom: 16px; }
+        .category-card h3 { margin-bottom: 8px; }
+        
+        /* Blog Grid */
+        .posts-section { padding: 60px 0; }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        
+        .post-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-light);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card-img {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-content { padding: 24px; }
+        
+        .card-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-weight: 600;
+            display: inline-block;
+            padding: 4px 12px;
+            background: #f8efe7;
+            border-radius: 50px;
+        }
+        
+        body.dark-mode .card-category { background: #2a2a4a; }
+        
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin: 12px 0 12px;
+            font-weight: 600;
+        }
+        
+        .post-meta-footer {
+            display: flex;
+            gap: 16px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin: 16px 0;
+        }
+        
+        .read-more {
+            font-weight: 600;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+        
+        .read-more:hover { gap: 12px; }
+        
+        /* Newsletter */
+        .newsletter-section { padding: 60px 0; }
+        
+        .newsletter {
+            background: #2c2c3a;
+            color: white;
+            border-radius: 40px;
+            padding: 56px 48px;
+            text-align: center;
+        }
+        
+        .newsletter h3 { font-family: 'Playfair Display', serif; font-size: 1.9rem; }
+        
+        .news-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            max-width: 500px;
+            margin: 24px auto 0;
+        }
+        
+        .news-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .news-form button {
+            background: var(--accent);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
         .news-form button:hover { background: var(--accent-dark); }
         
-        .post-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85);
-            z-index: 1000; display: none; justify-content: center; align-items: center; overflow-y: auto;
-        }
-        .post-modal {
-            background: white; max-width: 850px; width: 90%; margin: 40px auto; border-radius: 32px;
-            padding: 48px; position: relative; max-height: 90vh; overflow-y: auto;
-        }
-        .close-modal {
-            position: absolute; top: 24px; right: 28px; font-size: 28px; cursor: pointer; color: var(--text-muted);
-            transition: color 0.2s; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; background: #f8efe7;
-        }
-        .close-modal:hover { color: var(--accent); background: #f0e4da; }
-        .post-modal h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 20px 0 16px; line-height: 1.3; }
-        .post-meta { color: var(--accent); font-size: 0.85rem; margin-bottom: 24px; display: flex; gap: 16px; align-items: center; }
-        .post-modal img { width: 100%; border-radius: 24px; margin: 20px 0; }
-        .post-content p { margin-bottom: 20px; line-height: 1.8; color: var(--text-dark); font-size: 1.05rem; }
-        .post-content h3 { margin: 32px 0 16px; font-family: 'Playfair Display', serif; font-size: 1.5rem; }
-        .post-content h4 { margin: 20px 0 10px; font-size: 1.1rem; color: var(--accent); }
-        .post-content ul, .post-content ol { margin: 16px 0 16px 24px; line-height: 1.7; }
-        .post-content li { margin: 8px 0; }
-        .pull-quote {
-            background: #f8efe7; padding: 24px 32px; border-left: 4px solid var(--accent);
-            margin: 32px 0; font-style: italic; font-size: 1.2rem; font-family: 'Playfair Display', serif;
+        /* Footer */
+        footer {
+            background: #f2ebe4;
+            padding: 48px 0 32px;
+            margin-top: 40px;
         }
         
-        footer { background: #f2ebe4; padding: 48px 0 32px; margin-top: 40px; border-top: 1px solid var(--border-light); }
-        .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
-        .social-icons a { margin-right: 20px; font-size: 1.3rem; color: #5a5a6e; transition: color 0.2s; }
+        body.dark-mode footer { background: #0f0f1a; }
+        
+        .footer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .social-icons a {
+            margin-right: 20px;
+            font-size: 1.3rem;
+            color: #5a5a6e;
+            transition: color 0.2s;
+        }
+        
         .social-icons a:hover { color: var(--accent); }
-        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2c2c3a; color: white; padding: 12px 24px; border-radius: 60px; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; font-size: 0.9rem; }
-        .mobile-nav { position: fixed; top: 70px; left: 0; width: 100%; background: white; padding: 24px; display: flex; flex-direction: column; gap: 20px; z-index: 99; transform: translateY(-120%); transition: transform 0.3s; border-bottom: 1px solid var(--border-light); box-shadow: var(--shadow-md); }
-        .mobile-nav.open { transform: translateY(0); }
-        .mobile-nav a { padding: 10px 0; font-weight: 500; border-bottom: 1px solid var(--border-light); }
         
-        @media (max-width: 880px) { .nav-links { display: none; } .menu-icon { display: block; } .hero-text h2 { font-size: 2.3rem; } .post-modal { padding: 28px; } .post-modal h1 { font-size: 1.6rem; } }
-        @media (max-width: 680px) { .hero-grid { flex-direction: column; } .hero-visual { width: 100%; min-height: 240px; } .section { padding: 48px 0; } .newsletter { padding: 36px 24px; } }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 0.75rem;
+            color: #7a6a5c;
+        }
+        
+        /* Post Modal */
+        .post-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        
+        .post-modal-content {
+            background: var(--bg-card);
+            max-width: 850px;
+            width: 90%;
+            margin: 40px auto;
+            border-radius: 32px;
+            padding: 48px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        
+        .close-modal:hover { color: var(--accent); }
+        
+        .post-modal-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin: 20px 0 16px;
+        }
+        
+        .post-meta {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .post-modal-content img {
+            width: 100%;
+            border-radius: 24px;
+            margin: 20px 0;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .post-content p { margin-bottom: 20px; }
+        .post-content h3 {
+            margin: 32px 0 16px;
+            font-family: 'Playfair Display', serif;
+        }
+        .post-content ul, .post-content ol {
+            margin: 16px 0 16px 32px;
+        }
+        
+        .pull-quote {
+            background: #f8efe7;
+            padding: 24px 32px;
+            border-left: 4px solid var(--accent);
+            margin: 32px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        body.dark-mode .pull-quote { background: #2a2a4a; }
+        
+        /* Share Buttons */
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .share-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        /* Like Section */
+        .like-section {
+            text-align: center;
+            margin: 32px 0;
+        }
+        
+        .like-button {
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #e25555;
+            transition: transform 0.2s;
+        }
+        
+        .like-button:hover { transform: scale(1.1); }
+        
+        /* Comments */
+        .comments-section {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .comment-form input, .comment-form textarea {
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-family: inherit;
+            background: var(--bg-card);
+            color: var(--text-dark);
+        }
+        
+        .comment {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .comment strong { color: var(--accent); }
+        .comment small { color: var(--text-muted); font-size: 0.75rem; }
+        
+        .no-comments {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+        
+        /* Admin Panel */
+        .admin-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .admin-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .admin-tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        
+        .admin-tab.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .admin-panel { display: none; }
+        .admin-panel.active { display: block; }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-family: inherit;
+            background: var(--bg-card);
+            color: var(--text-dark);
+        }
+        
+        .form-group textarea { min-height: 200px; }
+        
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .post-actions { display: flex; gap: 12px; }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .btn-danger:hover { background: #c82333; }
+        
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .login-box {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .login-box input {
+            padding: 12px 16px;
+            margin: 16px 0;
+            width: 100%;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+        }
+        
+        /* Loading & Error */
+        .loading, .error, .no-posts {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 880px) {
+            .nav-links { display: none; }
+            .menu-icon { display: block; }
+            .hero-text h2 { font-size: 2.3rem; }
+            .post-modal-content { padding: 28px; }
+        }
+        
+        @media (max-width: 680px) {
+            .hero-grid { flex-direction: column; }
+            .hero-visual { width: 100%; min-height: 250px; }
+            .container { padding: 0 20px; }
+            .newsletter { padding: 36px 24px; }
+        }
     </style>
 </head>
 <body>
 
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+
+<!-- Trending Bar -->
 <div class="trending-bar">
     <div class="ticker">
-        <span><i class="fas fa-fire"></i> BREAKING: SAINT LAURENT CREATIVE DIRECTOR EXITS</span>
-        <span><i class="fas fa-star"></i> COPENHAGEN FASHION WEEK HIGHLIGHTS</span>
-        <span><i class="fas fa-heart"></i> STYLEVERSE EDITORS' PICKS: FALL 2025</span>
-        <span><i class="fas fa-globe"></i> SUSTAINABLE FASHION SUMMIT BEGINS</span>
-        <span><i class="fas fa-fire"></i> VIRAL: BALENCIAGA MUD SHOW SPARKS DEBATE</span>
+        <span><i class="fas fa-fire"></i> TRENDING: FASHION WEEK HIGHLIGHTS</span>
+        <span><i class="fas fa-star"></i> SUSTAINABLE FASHION RISING</span>
+        <span><i class="fas fa-heart"></i> STYLEVERSE EDITORS' PICKS</span>
+        <span><i class="fas fa-globe"></i> NEW POST: STREET STYLE GUIDE</span>
+        <span><i class="fas fa-fire"></i> FALL/WINTER 2025 TRENDS</span>
     </div>
 </div>
 
+<!-- Header -->
 <header class="site-header">
     <div class="container header-inner">
-        <div class="logo" id="logoHome"><h1>STYLEVERSE</h1><span>fashion · culture · future</span></div>
-        <div class="nav-links"><a data-nav="home">HOME</a><a data-nav="runway">RUNWAY</a><a data-nav="editorial">EDITORIAL</a><a data-nav="street">STREET</a><a data-nav="magazine">MAGAZINE</a></div>
-        <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+        <div class="logo" id="logoHome">
+            <h1>STYLEVERSE</h1>
+            <span>fashion · culture · future</span>
+        </div>
+        <nav class="nav-links">
+            <a onclick="showHome()">HOME</a>
+            <a onclick="showExplore()">EXPLORE</a>
+            <a onclick="showAbout()">ABOUT</a>
+            <a onclick="showContact()">CONTACT</a>
+            <a onclick="showAdminLogin()" style="color: var(--accent);"><i class="fas fa-crown"></i> Admin</a>
+        </nav>
+        <div class="header-actions">
+            <button id="searchToggle" class="search-toggle"><i class="fas fa-search"></i></button>
+            <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
     </div>
-    <div class="mobile-nav" id="mobileMenu"><a data-nav="home">HOME</a><a data-nav="runway">RUNWAY</a><a data-nav="editorial">EDITORIAL</a><a data-nav="street">STREET</a><a data-nav="magazine">MAGAZINE</a></div>
+    
+    <!-- Search Bar -->
+    <div id="searchBar" class="search-bar">
+        <div class="container">
+            <input type="text" id="searchInput" placeholder="Search articles, trends, designers..." autocomplete="off">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+    
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileMenu">
+        <a onclick="showHome()">HOME</a>
+        <a onclick="showExplore()">EXPLORE</a>
+        <a onclick="showAbout()">ABOUT</a>
+        <a onclick="showContact()">CONTACT</a>
+        <a onclick="showCategory('Runway')">RUNWAY</a>
+        <a onclick="showCategory('Street Style')">STREET STYLE</a>
+        <a onclick="showCategory('Sustainable')">SUSTAINABLE</a>
+        <a onclick="showCategory('Beauty')">BEAUTY</a>
+    </nav>
 </header>
 
-<main>
-    <section class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <div class="badge">✦ EST. 2026 ✦</div>
-                <h2>Where fashion <br>meets the future.</h2>
-                <p>StyleVerse is your daily dose of avant-garde trends, timeless style, and the cultural moments shaping the fashion multiverse.</p>
-                <div><button class="btn" id="exploreBtn">Explore stories</button><button class="btn btn-outline" id="joinBtn">Join the verse</button></div>
-            </div>
-            <div class="hero-visual" style="background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format');"></div>
-        </div>
-    </section>
+<!-- Main Content Container -->
+<main id="mainContent"></main>
 
-    <div class="container section" id="blogSection">
-        <h2 class="section-title">Latest from the Verse</h2>
-        <div class="section-sub">Iconic looks, emerging designers & insider edits — updated daily</div>
-        <div class="blog-grid" id="blogGrid"></div>
+<!-- Post Modal -->
+<div id="postModal" class="post-modal-overlay">
+    <div class="post-modal-content">
+        <span class="close-modal" onclick="closePostModal()">&times;</span>
+        <div id="modalContent"></div>
     </div>
+</div>
 
-    <div class="container"><div class="newsletter"><h3>Enter the StyleVerse</h3><p>Get weekly drops, exclusive lookbooks & early access to features.</p><div class="news-form"><input type="email" id="newsEmail" placeholder="Your email address"><button id="subscribeBtn">Subscribe →</button></div><p id="newsMsg" style="margin-top: 16px; font-size: 0.8rem;"></p></div></div>
-</main>
-
+<!-- Footer -->
 <footer>
     <div class="container footer-grid">
-        <div class="footer-col"><h3 style="font-family:'Playfair Display';">STYLEVERSE</h3><p>Defining the new language of fashion. Bold, inclusive, visionary.</p><div class="social-icons"><a href="#" class="social-link" data-social="instagram"><i class="fab fa-instagram"></i></a><a href="#" class="social-link" data-social="twitter"><i class="fab fa-twitter"></i></a><a href="#" class="social-link" data-social="pinterest"><i class="fab fa-pinterest"></i></a><a href="#" class="social-link" data-social="tiktok"><i class="fab fa-tiktok"></i></a></div></div>
-        <div class="footer-col"><h4>Explore</h4><p>Runway reports</p><p>Street style diaries</p><p>Sustainable futures</p><p>Beauty & beyond</p></div>
-        <div class="footer-col"><h4>Info</h4><p>About us</p><p>Contact / PR</p><p>Advertise</p><p>Terms & privacy</p></div>
+        <div class="footer-col">
+            <h3>STYLEVERSE</h3>
+            <p>Defining the new language of fashion. Bold, inclusive, visionary.</p>
+            <div class="social-icons" id="socialIcons"></div>
+        </div>
+        <div class="footer-col">
+            <h4>Explore</h4>
+            <p><a onclick="showCategory('Runway')">Runway reports</a></p>
+            <p><a onclick="showCategory('Street Style')">Street style diaries</a></p>
+            <p><a onclick="showCategory('Sustainable')">Sustainable futures</a></p>
+            <p><a onclick="showCategory('Beauty')">Beauty & beyond</a></p>
+        </div>
+        <div class="footer-col">
+            <h4>Info</h4>
+            <p><a onclick="showAbout()">About us</a></p>
+            <p><a onclick="showContact()">Contact</a></p>
+            <p><a onclick="showAdvertise()">Advertise</a></p>
+            <p><a onclick="showTerms()">Terms & privacy</a></p>
+        </div>
     </div>
-    <div class="container" style="text-align: center; margin-top: 48px; font-size: 0.75rem; color: #7a6a5c;">© 2025 StyleVerse — all rights reserved. Fashion is an attitude.</div>
+    <div class="container footer-bottom">
+        <p>© 2025 StyleVerse — all rights reserved. Fashion is an attitude.</p>
+    </div>
 </footer>
-
-<div id="postModal" class="post-overlay"><div class="post-modal"><span class="close-modal">&times;</span><div id="modalContent"></div></div></div>
-<div id="toastMsg" class="toast-msg"></div>
 
 <script>
     // ============================================
-    // BLOG POSTS DATA - All likes start at 0 (authentic!)
-    // TO ADD A NEW POST: Copy one of these objects, give it a unique ID,
-    // fill in your content, and add it to the postsData array below.
+    // STYLEVERSE - COMPLETE FASHION BLOG
+    // No Firebase, No Credit Card Needed!
+    // Everything works in your browser
     // ============================================
     
-    const postsData = [
+    // ===== CONFIGURATION =====
+    const CONFIG = {
+        adminPassword: "styleverse123",  // Change this to your own password!
+        siteName: "StyleVerse",
+        socialLinks: {
+            instagram: "",  // Add your Instagram URL when ready
+            twitter: "",    // Add your Twitter URL when ready
+            pinterest: "",  // Add your Pinterest URL when ready
+            tiktok: ""      // Add your TikTok URL when ready
+        }
+    };
+    
+    // ===== DEFAULT POSTS =====
+    let posts = [
         {
             id: 1,
-            category: "RUNWAY",
             title: "Paris Couture Week: The Ethereal Revival",
-            excerpt: "Sheer layers, sculptural silhouettes and a return to romanticism define the season as designers embrace lightness and movement.",
-            trend: "Haute couture",
-            img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format"
+            category: "Runway",
+            excerpt: "Sheer layers, sculptural silhouettes and a return to romanticism define the season.",
+            content: `<p>The streets of Paris were transformed into a dreamscape this season as designers embraced ethereal aesthetics and romantic silhouettes. From sheer organza overlays to sculptural florals, the Spring/Summer 2025 couture collections celebrated lightness and movement.</p>
+            <div class="pull-quote">"Fashion is returning to its roots of fantasy and escape. After years of utilitarian dressing, clients are craving the extraordinary." — Sarah Mower, Vogue</div>
+            <h3>The Standout Shows</h3>
+            <p><strong>Chanel</strong> reimagined the classic tweed suit with translucent layers and iridescent sequins. <strong>Dior</strong> presented a collection inspired by celestial bodies — midnight blue gowns with constellation embroidery. <strong>Valentino</strong> surprised everyone with an all-white collection that played with texture and shadow.</p>
+            <h3>Key Trends to Watch</h3>
+            <ul><li><strong>Sheer Everything:</strong> From organza to tulle</li><li><strong>Cape Silhouettes:</strong> Dramatic flowing outer layers</li><li><strong>Intricate Beadwork:</strong> Hand-embroidered details</li><li><strong>Sculptural Florals:</strong> 3D flowers that seem to grow from garments</li></ul>
+            <p>Backstage, the buzz was all about sustainable couture — many houses showcased upcycled fabrics and deadstock materials, proving that luxury and ethics can coexist beautifully. Schiaparelli used exclusively repurposed materials for their entire collection, setting a new standard for responsible haute couture.</p>`,
+            image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format",
+            date: "2025-03-15",
+            likes: 0,
+            comments: []
         },
         {
             id: 2,
-            category: "STREET STYLE",
             title: "Tokyo Street A/W: Layering as Art",
-            excerpt: "Harajuku meets minimalism — unexpected textures and monochromatic statements dominate Tokyo's fashion districts this season.",
-            trend: "Urban edge",
-            img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format"
+            category: "Street Style",
+            excerpt: "Harajuku meets minimalism — unexpected textures and monochromatic statements.",
+            content: `<p>Tokyo's fashion districts have always been laboratories of style. The streets of Harajuku, Shibuya, and Shimokitazawa are showcasing a fascinating evolution of layering techniques that blur the lines between art and fashion.</p>
+            <div class="pull-quote">"Tokyo street style isn't about following rules — it's about creating your own visual language." — Yohji Yamamoto</div>
+            <h3>The Art of Layering</h3>
+            <p>Forget the traditional coat-over-shirt formula. Tokyo's fashion crowd is experimenting with asymmetrical layering — sheer mesh over knitwear, kimono-inspired outer layers paired with tailored trousers, and unexpected textile combinations like wool with silk and leather with lace.</p>
+            <h3>Where to Shop in Tokyo</h3>
+            <p>Head to Shimokitazawa's vintage district for unique finds, Harajuku's Cat Street for emerging designers, and Shibuya's department stores for the latest collections. The true Tokyo shopping experience is about discovery — take your time and let the city guide you.</p>`,
+            image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format",
+            date: "2025-03-10",
+            likes: 0,
+            comments: []
         },
         {
             id: 3,
-            category: "EDITORIAL",
             title: "The Quiet Luxury Movement",
-            excerpt: "Why stealth wealth and investment pieces are taking over modern wardrobes in an era of conscious consumption.",
-            trend: "Timeless chic",
-            img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&auto=format"
+            category: "Editorial",
+            excerpt: "Why stealth wealth and investment pieces are taking over modern wardrobes.",
+            content: `<p>In an era of logomania fatigue, a new aesthetic has emerged: quiet luxury. Also known as "stealth wealth," this movement prioritizes impeccable quality, timeless design, and subtle sophistication over flashy branding.</p>
+            <div class="pull-quote">"Luxury is in each detail. When something is truly well-made, it doesn't need a logo to announce its worth." — Hubert de Givenchy</div>
+            <h3>Investment Pieces Worth Every Penny</h3>
+            <ul><li><strong>The Perfect Blazer:</strong> Look for natural shoulders, quality lining</li><li><strong>Wide-Leg Trousers:</strong> In neutral tones like cream, charcoal, or navy</li><li><strong>A Cashmere Sweater:</strong> Invest in the highest ply you can afford</li><li><strong>Leather Goods:</strong> Simple, unbranded bags that develop a beautiful patina</li></ul>
+            <p>The quiet luxury movement aligns perfectly with sustainable fashion principles. Buying fewer, better things reduces fashion's environmental impact while elevating personal style. These pieces aren't designed for a single season — they're meant to be worn, loved, and eventually passed down.</p>`,
+            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format",
+            date: "2025-03-05",
+            likes: 0,
+            comments: []
         },
         {
             id: 4,
-            category: "DESIGNER SPOTLIGHT",
             title: "Emerging African Avant-Garde",
-            excerpt: "Designers reshaping global fashion with vibrant prints, radical tailoring, and centuries-old craftsmanship techniques.",
-            trend: "Cultural wave",
-            img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format"
+            category: "Designer Spotlight",
+            excerpt: "Designers reshaping global fashion with vibrant prints and radical tailoring.",
+            content: `<p>African fashion is having a global moment, and a new generation of designers is leading the charge. From Lagos to Marrakech, creative directors are reimagining traditional textiles for the contemporary world.</p>
+            <div class="pull-quote">"African fashion is not a trend. It is a movement that has been building for decades, and now the world is ready to listen." — Edward Enninful</div>
+            <h3>Designers to Watch</h3>
+            <p><strong>Kenneth Ize (Nigeria):</strong> Elevating aso-oke fabric to luxury heights. <strong>Thebe Magugu (South Africa):</strong> Blending archival research with modern tailoring. <strong>Loza Maléombho (Ivory Coast):</strong> Creating futuristic silhouettes inspired by ancestral warrior aesthetics.</p>
+            <h3>Where to Buy</h3>
+            <p>Many African designers now ship internationally through their websites. Platforms like Industrie Africa and The Folklore are also making these collections accessible to global audiences. Fashion insiders predict African avant-garde will dominate the next decade of global style.</p>`,
+            image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format",
+            date: "2025-02-28",
+            likes: 0,
+            comments: []
         },
         {
             id: 5,
-            category: "TREND REPORT",
             title: "Metallic & Mesh: Club Renaissance",
-            excerpt: "From rave to red carpet — futuristic fabrics and Y2K revival collide in fashion's most exciting new aesthetic.",
-            trend: "Futuristic glam",
-            img: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&auto=format"
+            category: "Trend Report",
+            excerpt: "From rave to red carpet — futuristic fabrics are taking over.",
+            content: `<p>The Y2K revival has evolved into something entirely new: Club Renaissance. This aesthetic draws from early 2000s rave culture but updates it with luxury fabrics and sophisticated silhouettes.</p>
+            <div class="pull-quote">"Club Renaissance isn't nostalgia — it's reclamation. We're taking the energy of the past and making it our own." — Rachel Tashjian</div>
+            <h3>How to Wear It</h3>
+            <p><strong>Start Small:</strong> A metallic skirt with a simple cashmere sweater creates the perfect day-to-night transition. Mesh sleeves under a blazer add intrigue without overwhelming.</p>
+            <p><strong>Go Bold:</strong> For the fashion-forward, head-to-toe shine is making a comeback. Think silver trousers with a matching metallic top, or an iridescent dress that shifts color as you move.</p>
+            <p>Celebrities like Dua Lipa and Rosalía have embraced this trend, proving that clubwear can be red-carpet ready.</p>`,
+            image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&auto=format",
+            date: "2025-02-20",
+            likes: 0,
+            comments: []
         },
         {
             id: 6,
-            category: "ACCESSORIES",
             title: "Bags to Invest in 2025",
-            excerpt: "Archival relaunches and indie leather goods that hold value while elevating every outfit in your rotation.",
-            trend: "Investment pieces",
-            img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format"
+            category: "Accessories",
+            excerpt: "Archival relaunches and indie leather goods that hold value.",
+            content: `<p>Handbag trends come and go, but some pieces are worth the investment. StyleVerse's editors have identified the bags that will retain value while elevating every outfit.</p>
+            <div class="pull-quote">"A great bag is an investment in yourself. It carries your life and your confidence." — Anna Wintour</div>
+            <h3>Top Investment Picks</h3>
+            <p><strong>Hermès Kelly and Birkin</strong> remain the gold standard of bag investment. <strong>The Row's Margaux bag</strong> has become the quiet luxury icon of the decade. <strong>Bottega Veneta's Cabat</strong> takes two days for a single artisan to complete.</p>
+            <h3>Pro Tips</h3>
+            <p>Neutral colors (black, tan, chocolate brown) have better resale value than seasonal shades. Always keep dust bags and authenticity cards — they can increase resale value by 20-30%. Limited editions and collaborations often appreciate faster than core collection pieces.</p>`,
+            image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&auto=format",
+            date: "2025-02-15",
+            likes: 0,
+            comments: []
         }
     ];
-
-    // FULL POST CONTENT - Professional, expanded articles
-    const fullPosts = {
-        1: {
-            title: "Paris Couture Week: The Ethereal Revival",
-            category: "RUNWAY",
-            date: "March 15, 2025",
-            readTime: "6 min read",
-            image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format",
-            content: `<p>The streets of Paris were transformed into a dreamscape this season as designers embraced ethereal aesthetics and romantic silhouettes. From sheer organza overlays to sculptural florals, the Spring/Summer 2025 couture collections celebrated lightness and movement in ways we haven't seen since the golden age of Galliano.</p>
-            
-            <div class="pull-quote">"Fashion is returning to its roots of fantasy and escape. After years of utilitarian dressing, clients are craving the extraordinary." — Sarah Mower, Vogue</div>
-            
-            <h3>The Standout Shows</h3>
-            <p><strong>Chanel</strong> reimagined the classic tweed suit with translucent layers and iridescent sequins, paying homage to Gabrielle "Coco" Chanel's original vision while pushing into futuristic territory. Creative Director Virginie Viard described the collection as "a bridge between past and future."</p>
-            
-            <p><strong>Dior</strong> presented a collection inspired by celestial bodies — think midnight blue gowns with constellation embroidery that seemed to glow under the runway lights. Maria Grazia Chiuri collaborated with female artists to create wearable art that celebrates femininity in all its forms.</p>
-            
-            <p><strong>Valentino</strong> surprised everyone with an all-white collection that played with texture and shadow. Pierpaolo Piccioli proved that color isn't necessary to make a statement — the interplay of matte and gloss, opaque and sheer created a mesmerizing visual symphony.</p>
-            
-            <h3>Key Trends to Watch</h3>
-            <ul>
-                <li><strong>Sheer Everything:</strong> From organza to tulle, transparency dominated the runways.</li>
-                <li><strong>Cape Silhouettes:</strong> Dramatic, flowing outer layers that add movement to any look.</li>
-                <li><strong>Intricate Beadwork:</strong> Hand-embroidered details that take hundreds of hours to complete.</li>
-                <li><strong>Sculptural Florals:</strong> 3D flowers that seem to grow from the garments themselves.</li>
-            </ul>
-            
-            <p>Backstage, the buzz was all about sustainable couture — many houses showcased upcycled fabrics and deadstock materials, proving that luxury and ethics can coexist beautifully. Schiaparelli used exclusively repurposed materials for their entire collection, setting a new standard for responsible haute couture.</p>
-            
-            <h3>What This Means for Your Wardrobe</h3>
-            <p>While couture may seem distant from everyday dressing, the silhouettes and textures eventually trickle down to ready-to-wear. Look for sheer layering pieces, flowing capes, and romantic details in upcoming seasonal collections. The message is clear: fashion should be joyful, expressive, and unapologetically beautiful.</p>`
-        },
-        2: {
-            title: "Tokyo Street A/W: Layering as Art",
-            category: "STREET STYLE",
-            date: "March 10, 2025",
-            readTime: "5 min read",
-            image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format",
-            content: `<p>Tokyo's fashion districts have always been laboratories of style, and this Autumn/Winter season is no exception. The streets of Harajuku, Shibuya, and Shimokitazawa are showcasing a fascinating evolution of layering techniques that blur the lines between art and fashion.</p>
-            
-            <div class="pull-quote">"Tokyo street style isn't about following rules — it's about creating your own visual language." — Yohji Yamamoto</div>
-            
-            <h3>The Art of Layering</h3>
-            <p>Forget the traditional coat-over-shirt formula. Tokyo's fashion crowd is experimenting with asymmetrical layering — sheer mesh over knitwear, kimono-inspired outer layers paired with tailored trousers, and unexpected textile combinations like wool with silk and leather with lace.</p>
-            
-            <h4>The Five-Layer Rule</h4>
-            <p>Local stylists have coined the "five-layer rule" — not necessarily five garments, but five distinct visual elements that create depth and interest. This might include a base layer, a mid-layer with texture, a statement outer piece, unexpected accessories, and a pop of color or pattern that ties everything together.</p>
-            
-            <h3>Color Stories</h3>
-            <p>While monochromatic looks remain popular, this season introduces "controlled chaos" — intentional clashing of patterns and colors. Earth tones are juxtaposed with neon accents, creating visual tension that somehow works perfectly. The key is balance: one bold element anchors the chaos.</p>
-            
-            <h3>Accessories That Define</h3>
-            <ul>
-                <li><strong>Chunky Platform Boots:</strong> The bigger, the better — they ground even the most whimsical outfits.</li>
-                <li><strong>Oversized Tote Bags:</strong> Function meets fashion with bags that can carry everything (and make a statement).</li>
-                <li><strong>Statement Eyewear:</strong> From tiny Y2K shades to exaggerated architectural frames.</li>
-                <li><strong>Vintage Finds:</strong> One-of-a-kind pieces that add authenticity to any look.</li>
-            </ul>
-            
-            <h3>Where to Shop in Tokyo</h3>
-            <p>For those inspired to embrace Tokyo layering, head to Shimokitazawa's vintage district for unique finds, Harajuku's Cat Street for emerging designers, and Shibuya's department stores for the latest collections. The true Tokyo shopping experience is about discovery — take your time and let the city guide you.</p>`
-        },
-        3: {
-            title: "The Quiet Luxury Movement",
-            category: "EDITORIAL",
-            date: "March 5, 2025",
-            readTime: "7 min read",
-            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format",
-            content: `<p>In an era of logomania fatigue, a new aesthetic has emerged: quiet luxury. Also known as "stealth wealth," this movement prioritizes impeccable quality, timeless design, and subtle sophistication over flashy branding. It's a reaction to the excess of the 2010s and a embrace of mindful consumption.</p>
-            
-            <div class="pull-quote">"Luxury is in each detail. When something is truly well-made, it doesn't need a logo to announce its worth." — Hubert de Givenchy</div>
-            
-            <h3>What Defines Quiet Luxury?</h3>
-            <p>Think The Row, Loro Piana, Brunello Cucinelli, and Zegna — brands that whisper rather than shout. It's about exceptional fabrics (cashmere, vicuña, silk, the finest wools), flawless construction, and designs that transcend seasonal trends. The focus is on how clothes make you feel, not how they look in a selfie.</p>
-            
-            <h4>The Psychology Behind the Movement</h4>
-            <p>Fashion psychologist Dr. Carolyn Mair explains: "Quiet luxury appeals to those who have nothing to prove. It's confidence manifested through restraint. These pieces signal insider knowledge — you understand quality in ways that aren't immediately obvious to the untrained eye."</p>
-            
-            <h3>Investment Pieces Worth Every Penny</h3>
-            <p>StyleVerse recommends building your quiet luxury wardrobe with these cornerstone pieces:</p>
-            <ul>
-                <li><strong>The Perfect Blazer:</strong> Look for natural shoulders, quality lining, and fabric with structure and drape.</li>
-                <li><strong>Wide-Leg Trousers:</strong> In neutral tones like cream, charcoal, or navy — the foundation of effortless elegance.</li>
-                <li><strong>A Cashmere Sweater:</strong> Invest in the highest ply you can afford. It will last decades with proper care.</li>
-                <li><strong>Leather Goods:</strong> Simple, unbranded bags and belts that will develop a beautiful patina over time.</li>
-                <li><strong>Quality Footwear:</strong> Leather loafers, minimalist boots, and simple sandals from heritage shoemakers.</li>
-            </ul>
-            
-            <h3>The Sustainability Connection</h3>
-            <p>The quiet luxury movement aligns perfectly with sustainable fashion principles. Buying fewer, better things reduces fashion's environmental impact while elevating personal style. These pieces aren't designed for a single season — they're meant to be worn, loved, and eventually passed down.</p>
-            
-            <h3>How to Spot Quality</h3>
-            <p>Look for: reinforced seams, natural fibers, mother-of-pearl buttons, aligned patterns, and weight that feels substantial without being heavy. These details separate true investment pieces from overpriced fast fashion.</p>`
-        },
-        4: {
-            title: "Emerging African Avant-Garde",
-            category: "DESIGNER SPOTLIGHT",
-            date: "February 28, 2025",
-            readTime: "8 min read",
-            image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format",
-            content: `<p>African fashion is having a global moment, and a new generation of designers is leading the charge. From Lagos to Marrakech, from Accra to Johannesburg, creative directors are reimagining traditional textiles and silhouettes for the contemporary world — and the industry is finally paying attention.</p>
-            
-            <div class="pull-quote">"African fashion is not a trend. It is a movement that has been building for decades, and now the world is ready to listen." — Edward Enninful, former Editor-in-Chief of British Vogue</div>
-            
-            <h3>Designers to Watch</h3>
-            <p><strong>Kenneth Ize (Nigeria):</strong> The Lagos-based designer continues to elevate aso-oke fabric — a handwoven textile traditionally used for ceremonial garments — to luxury heights. His collaborations with Karl Lagerfeld and appearances at Paris Fashion Week have cemented his status as a global force.</p>
-            
-            <p><strong>Thebe Magugu (South Africa):</strong> The LVMH Prize winner blends archival research with modern tailoring, creating collections that tell stories about South African history and contemporary life. Each garment comes with extensive documentation — look books that read like academic journals.</p>
-            
-            <p><strong>Loza Maléombho (Ivory Coast):</strong> Based between Abidjan and New York, Maléombho creates futuristic silhouettes inspired by ancestral warrior aesthetics. Her work has been worn by Beyoncé, Lupita Nyong'o, and Michelle Obama.</p>
-            
-            <p><strong>Moshions (Rwanda):</strong> Designer Moses Turahirwa incorporates traditional Rwandan motifs into streetwear-inspired silhouettes, bridging the gap between heritage and contemporary cool.</p>
-            
-            <h3>Textile Renaissance</h3>
-            <p>Indigenous fabrics like kente (Ghana), mudcloth (Mali), shweshwe (South Africa), and kitenge (East Africa) are being reinterpreted for global audiences. Designers are preserving traditional weaving techniques while introducing contemporary cuts and unexpected color combinations.</p>
-            
-            <h4>Preserving Craftsmanship</h4>
-            <p>Many of these designers work directly with artisan communities, ensuring fair wages and preserving techniques that have been passed down for generations. This ethical approach to fashion production is gaining attention from conscious consumers worldwide.</p>
-            
-            <h3>The Economic Impact</h3>
-            <p>According to the African Development Bank, the continent's fashion industry could be worth $15.5 billion by 2025. Investment in local manufacturing, textile production, and design education is creating jobs and economic opportunities across the continent.</p>
-            
-            <h3>Where to Buy</h3>
-            <p>Many African designers now ship internationally through their websites. Platforms like Industrie Africa and The Folklore are also making these collections accessible to global audiences. Fashion insiders predict African avant-garde will dominate the next decade of global style — get ahead of the curve now.</p>`
-        },
-        5: {
-            title: "Metallic & Mesh: Club Renaissance",
-            category: "TREND REPORT",
-            date: "February 20, 2025",
-            readTime: "5 min read",
-            image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&auto=format",
-            content: `<p>The Y2K revival has evolved into something entirely new: Club Renaissance. This aesthetic draws from early 2000s rave culture but updates it with luxury fabrics, sophisticated silhouettes, and a distinctly modern attitude.</p>
-            
-            <div class="pull-quote">"Club Renaissance isn't nostalgia — it's reclamation. We're taking the energy of the past and making it our own." — Rachel Tashjian, fashion critic</div>
-            
-            <h3>The Fabrics That Define the Trend</h3>
-            <p>Metallic lamé, holographic vinyl, fishnet mesh, liquid sequins, and iridescent finishes are everywhere — from the runways of Mugler, Blumarine, and Paco Rabanne to the streets of London, New York, and Berlin. The key is mixing these attention-grabbing materials with structured pieces for balance.</p>
-            
-            <h3>How to Wear It</h3>
-            <p><strong>Start Small:</strong> A metallic skirt with a simple cashmere sweater creates the perfect day-to-night transition. Mesh sleeves under a blazer add intrigue without overwhelming.</p>
-            
-            <p><strong>Go Bold:</strong> For the fashion-forward, head-to-toe shine is making a comeback (yes, like the disco era but distinctly futuristic). Think silver trousers with a matching metallic top, or an iridescent dress that shifts color as you move.</p>
-            
-            <p><strong>Footwear Matters:</strong> Chunky platform boots (think Buffalo London or Demonia) ground even the most whimsical looks. Strappy metallic heels or crystal-embellished mules add glamour for evening events.</p>
-            
-            <h3>Celebrity Endorsement</h3>
-            <p>Dua Lipa, Rosalía, and Doja Cat have embraced this trend, proving that clubwear can be red-carpet ready. Beyoncé's Renaissance World Tour elevated the aesthetic to stadium-filling proportions, with custom looks from Mugler, Loewe, and Balmain.</p>
-            
-            <h3>The Makeup Connection</h3>
-            <p>The beauty counterpart to this trend is equally bold: glitter graphic eyeliner, glossy lips, and skin so dewy it looks wet. Brands like Pat McGrath Labs and Half Magic are leading the charge with products designed for maximum impact.</p>
-            
-            <h3>Where to Shop</h3>
-            <p>Look to Mugler (now under creative director Casey Cadwallader), Nensi Dojaka for mesh pieces, and emerging brands like Poster Girl and Sinead Gorey for club-ready looks. Vintage stores are also treasure troves for authentic Y2K metallic pieces.</p>`
-        },
-        6: {
-            title: "Bags to Invest in 2025",
-            category: "ACCESSORIES",
-            date: "February 15, 2025",
-            readTime: "6 min read",
-            image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&auto=format",
-            content: `<p>Handbag trends come and go, but some pieces are worth the investment. StyleVerse's editors have identified the bags that will retain (or increase) value while elevating every outfit in your rotation. Whether you're a collector or a first-time luxury buyer, these picks offer both style and financial wisdom.</p>
-            
-            <div class="pull-quote">"A great bag is an investment in yourself. It carries your life and your confidence." — Anna Wintour</div>
-            
-            <h3>Top Investment Picks</h3>
-            <p><strong>Hermès Kelly and Birkin</strong> remain the gold standard of bag investment, with some styles appreciating faster than gold or stocks. The waiting lists remain years long for a reason.</p>
-            
-            <p><strong>The Row's Margaux bag</strong> has become the quiet luxury icon of the decade. Understated, impeccably crafted, and already holding strong resale value.</p>
-            
-            <p><strong>Bottega Veneta's Cabat</strong> — the woven leather tote that takes two days for a single artisan to complete. No logos, no hardware — just exceptional craftsmanship that speaks for itself.</p>
-            
-            <p><strong>Loewe's Puzzle bag</strong> has proven its staying power. Jonathan Anderson's geometric design has become a modern classic since its 2015 debut.</p>
-            
-            <h3>Emerging Brands Worth Watching</h3>
-            <p>Look to indie labels for quality leather goods at accessible price points with serious potential for appreciation:</p>
-            <ul>
-                <li><strong>Polène (Paris):</strong> Architectural designs with exceptional leather quality at a fraction of heritage house prices.</li>
-                <li><strong>Manu Atelier (Istanbul):</strong> Handcrafted bags with distinctive arrow logo and cult following.</li>
-                <li><strong>Wandler (Amsterdam):</strong> Clean lines, beautiful colors, and impeccable construction.</li>
-                <li><strong>DeMellier (London):</strong> Each bag funds a vaccine for a child in need — fashion with purpose.</li>
-            </ul>
-            
-            <h3>What to Look For</h3>
-            <p><strong>Pro tip #1:</strong> Neutral colors (black, tan, chocolate brown, navy) have better resale value than seasonal shades. They work across seasons and years.</p>
-            
-            <p><strong>Pro tip #2:</strong> Always keep dust bags, authenticity cards, and original packaging. These items can increase resale value by 20-30%.</p>
-            
-            <p><strong>Pro tip #3:</strong> Limited editions and collaborations often appreciate faster than core collection pieces. Watch for announcements from brands like Louis Vuitton's artist collaborations or Dior's annual cruise collections.</p>
-            
-            <h3>Care Tips for Longevity</h3>
-            <p>Store bags stuffed with acid-free paper, avoid direct sunlight, and consider professional cleaning every few years. A well-maintained bag can last decades — and become a family heirloom.</p>`
-        }
-    };
-
-    // Initialize likes storage (all start at 0 - authentic!)
-    let likesData = {};
-    function initLikes() {
-        const stored = localStorage.getItem("styleverse_likes");
-        if(stored) {
-            likesData = JSON.parse(stored);
-        } else {
-            postsData.forEach(p => { likesData[p.id] = 0; }); // All start at 0!
-        }
-        saveLikes();
-    }
-    function saveLikes() { localStorage.setItem("styleverse_likes", JSON.stringify(likesData)); }
-
-    function showToast(message) { 
-        const toast = document.getElementById("toastMsg"); 
-        toast.textContent = message; 
-        toast.style.opacity = "1"; 
-        setTimeout(() => { toast.style.opacity = "0"; }, 2500); 
+    
+    let nextId = 7;
+    
+    // ===== HELPER FUNCTIONS =====
+    function savePosts() {
+        localStorage.setItem('styleverse_posts', JSON.stringify(posts));
+        localStorage.setItem('styleverse_next_id', nextId.toString());
     }
     
-    function trackEvent(category, action, label) { 
-        if(typeof gtag !== 'undefined') { 
-            gtag('event', action, { 'event_category': category, 'event_label': label }); 
+    function loadPostsFromStorage() {
+        const stored = localStorage.getItem('styleverse_posts');
+        if (stored) {
+            posts = JSON.parse(stored);
+            const storedId = localStorage.getItem('styleverse_next_id');
+            if (storedId) nextId = parseInt(storedId);
+        } else {
+            savePosts();
         }
     }
-
+    
+    function getPostById(id) {
+        return posts.find(p => p.id === parseInt(id));
+    }
+    
+    function addPost(postData) {
+        const newPost = {
+            id: nextId,
+            title: postData.title,
+            category: postData.category,
+            excerpt: postData.excerpt,
+            content: postData.content,
+            image: postData.image || "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format",
+            date: new Date().toISOString().split('T')[0],
+            likes: 0,
+            comments: []
+        };
+        posts.unshift(newPost);
+        nextId++;
+        savePosts();
+        return newPost;
+    }
+    
+    function updatePost(id, updatedData) {
+        const index = posts.findIndex(p => p.id === parseInt(id));
+        if (index !== -1) {
+            posts[index] = { ...posts[index], ...updatedData };
+            savePosts();
+            return posts[index];
+        }
+        return null;
+    }
+    
+    function deletePost(id) {
+        posts = posts.filter(p => p.id !== parseInt(id));
+        savePosts();
+    }
+    
+    function addComment(postId, name, text) {
+        const post = getPostById(postId);
+        if (post) {
+            const comment = {
+                id: Date.now(),
+                name: name.substring(0, 50),
+                text: text.substring(0, 500),
+                date: new Date().toISOString()
+            };
+            post.comments = post.comments || [];
+            post.comments.unshift(comment);
+            savePosts();
+            
+            // Track in GA
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'comment', { 'event_category': 'Engagement', 'event_label': post.title });
+            }
+            return comment;
+        }
+        return null;
+    }
+    
+    function likePost(postId) {
+        const likedKey = `liked_${postId}`;
+        if (localStorage.getItem(likedKey)) {
+            return { success: false, message: "You already liked this post!" };
+        }
+        
+        const post = getPostById(postId);
+        if (post) {
+            post.likes = (post.likes || 0) + 1;
+            savePosts();
+            localStorage.setItem(likedKey, 'true');
+            
+            // Track in GA
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'like', { 'event_category': 'Engagement', 'event_label': post.title });
+            }
+            return { success: true, newCount: post.likes };
+        }
+        return { success: false, message: "Post not found" };
+    }
+    
+    // ===== UI RENDERING FUNCTIONS =====
+    function renderHome() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section class="hero">
+                <div class="container hero-grid">
+                    <div class="hero-text">
+                        <div class="badge">✦ EST. 2026 ✦</div>
+                        <h2>Where fashion <br>meets the future.</h2>
+                        <p>StyleVerse is your daily dose of avant-garde trends, timeless style, and the cultural moments shaping the fashion multiverse.</p>
+                        <div>
+                            <button class="btn" onclick="showExplore()">Explore stories</button>
+                            <button class="btn btn-outline" onclick="showContact()">Join the verse</button>
+                        </div>
+                    </div>
+                    <div class="hero-visual" style="background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format');"></div>
+                </div>
+            </section>
+            
+            <section class="categories-section">
+                <div class="container">
+                    <h2 class="section-title">Explore by Category</h2>
+                    <div class="categories-grid">
+                        <div class="category-card" style="background: linear-gradient(135deg, #2c2c3a, #c47a5a);" onclick="showCategory('Runway')">
+                            <i class="fas fa-tape"></i>
+                            <h3>Runway Reports</h3>
+                            <p>Paris, Milan, London, NYC</p>
+                        </div>
+                        <div class="category-card" style="background: linear-gradient(135deg, #1e1e2a, #a55d3f);" onclick="showCategory('Street Style')">
+                            <i class="fas fa-walking"></i>
+                            <h3>Street Style Diaries</h3>
+                            <p>Tokyo, London, NYC, Berlin</p>
+                        </div>
+                        <div class="category-card" style="background: linear-gradient(135deg, #2c3e2c, #6b8e6b);" onclick="showCategory('Sustainable')">
+                            <i class="fas fa-leaf"></i>
+                            <h3>Sustainable Futures</h3>
+                            <p>Eco-fashion & ethics</p>
+                        </div>
+                        <div class="category-card" style="background: linear-gradient(135deg, #3c2c3a, #c47a9a);" onclick="showCategory('Beauty')">
+                            <i class="fas fa-spa"></i>
+                            <h3>Beauty & Beyond</h3>
+                            <p>Skincare, makeup, wellness</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="posts-section">
+                <div class="container">
+                    <h2 class="section-title">Latest from the Verse</h2>
+                    <div class="section-sub">Iconic looks, emerging designers & insider edits — updated daily</div>
+                    <div class="blog-grid" id="homePostsGrid"></div>
+                </div>
+            </section>
+            
+            <section class="newsletter-section">
+                <div class="container">
+                    <div class="newsletter">
+                        <h3>Enter the StyleVerse</h3>
+                        <p>Get weekly drops, exclusive lookbooks & early access to features.</p>
+                        <div class="news-form">
+                            <input type="email" id="newsEmail" placeholder="Your email address">
+                            <button id="subscribeBtn">Subscribe →</button>
+                        </div>
+                        <p id="newsMsg" style="margin-top: 16px; font-size: 0.8rem;"></p>
+                    </div>
+                </div>
+            </section>
+        `;
+        
+        const homeGrid = document.getElementById('homePostsGrid');
+        if (homeGrid) {
+            homeGrid.innerHTML = renderPostsGrid(posts.slice(0, 6));
+        }
+        
+        document.getElementById('subscribeBtn')?.addEventListener('click', () => {
+            const email = document.getElementById('newsEmail').value.trim();
+            const msgDiv = document.getElementById('newsMsg');
+            if (!email) {
+                msgDiv.innerHTML = '✨ Please enter your email!';
+                msgDiv.style.color = '#ffd966';
+            } else if (!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email)) {
+                msgDiv.innerHTML = '⛓️ Invalid email address!';
+                msgDiv.style.color = '#f5b7b1';
+            } else {
+                msgDiv.innerHTML = `🎉 Thanks! You're now part of StyleVerse.`;
+                msgDiv.style.color = '#cbe6c2';
+                document.getElementById('newsEmail').value = '';
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'newsletter_signup', { 'event_category': 'Conversion', 'event_label': email });
+                }
+                setTimeout(() => msgDiv.innerHTML = '', 3000);
+            }
+        });
+    }
+    
+    function renderPostsGrid(postsArray) {
+        if (!postsArray || postsArray.length === 0) {
+            return '<div class="no-posts">No posts yet. Check back soon!</div>';
+        }
+        
+        return postsArray.map(post => `
+            <article class="post-card" onclick="openPost(${post.id})">
+                <div class="card-img" style="background-image: url('${post.image}');"></div>
+                <div class="card-content">
+                    <span class="card-category">${post.category}</span>
+                    <h3>${escapeHtml(post.title)}</h3>
+                    <p>${escapeHtml(post.excerpt || post.content.substring(0, 120))}...</p>
+                    <div class="post-meta-footer">
+                        <span><i class="far fa-calendar"></i> ${post.date}</span>
+                        <span><i class="far fa-heart"></i> ${post.likes || 0}</span>
+                        <span><i class="far fa-comment"></i> ${(post.comments || []).length}</span>
+                    </div>
+                    <div class="read-more">Read full story <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </article>
+        `).join('');
+    }
+    
+    function showExplore() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section class="posts-section" style="padding-top: 100px;">
+                <div class="container">
+                    <h2 class="section-title">All Articles</h2>
+                    <div class="section-sub">Browse all fashion stories</div>
+                    <div class="blog-grid" id="exploreGrid"></div>
+                </div>
+            </section>
+        `;
+        const exploreGrid = document.getElementById('exploreGrid');
+        if (exploreGrid) {
+            exploreGrid.innerHTML = renderPostsGrid(posts);
+        }
+    }
+    
+    function showCategory(category) {
+        const filtered = posts.filter(p => p.category === category);
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section class="posts-section" style="padding-top: 100px;">
+                <div class="container">
+                    <h2 class="section-title">${category}</h2>
+                    <div class="section-sub">All ${category} articles</div>
+                    <div class="blog-grid" id="categoryGrid"></div>
+                </div>
+            </section>
+        `;
+        const categoryGrid = document.getElementById('categoryGrid');
+        if (categoryGrid) {
+            categoryGrid.innerHTML = renderPostsGrid(filtered);
+        }
+    }
+    
+    function showAbout() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section style="padding: 120px 0 60px;">
+                <div class="container">
+                    <h1 class="section-title">About StyleVerse</h1>
+                    <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                        <p style="font-size: 1.2rem; margin-bottom: 24px;">StyleVerse is a premium fashion blog dedicated to exploring the intersection of style, culture, and the future of fashion.</p>
+                        <p>Founded in 2025, we believe that fashion is more than just clothing — it's a form of self-expression, art, and cultural commentary. Our mission is to bring you the most insightful coverage of runway trends, street style, sustainable fashion, and emerging designers from around the globe.</p>
+                        <p>Whether you're a fashion professional, a passionate enthusiast, or someone looking to refine your personal style, StyleVerse is your daily destination for inspiration and insight.</p>
+                        <h3 style="margin-top: 40px;">Our Values</h3>
+                        <ul style="margin: 20px 0 20px 40px;">
+                            <li><strong>Authenticity:</strong> We only share what we truly love and believe in</li>
+                            <li><strong>Inclusivity:</strong> Fashion is for everyone, and we celebrate all voices</li>
+                            <li><strong>Sustainability:</strong> We advocate for responsible fashion choices</li>
+                            <li><strong>Quality:</strong> Deep dives, not just surface-level coverage</li>
+                        </ul>
+                        <p>Thank you for being part of the StyleVerse community. Together, we're shaping the future of fashion.</p>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+    
+    function showContact() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section style="padding: 120px 0 60px;">
+                <div class="container">
+                    <h1 class="section-title">Contact Us</h1>
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <p style="text-align: center; margin-bottom: 32px;">Have a question, collaboration idea, or just want to say hello? We'd love to hear from you!</p>
+                        <div class="comment-form">
+                            <input type="text" id="contactName" placeholder="Your Name">
+                            <input type="email" id="contactEmail" placeholder="Your Email">
+                            <textarea id="contactMessage" rows="5" placeholder="Your Message"></textarea>
+                            <button class="btn" id="sendMessageBtn">Send Message</button>
+                        </div>
+                        <p id="contactMsg" style="text-align: center; margin-top: 20px;"></p>
+                        <div style="text-align: center; margin-top: 48px;">
+                            <p><i class="fas fa-envelope"></i> hello@styleverse.com</p>
+                            <p><i class="fas fa-map-marker-alt"></i> New York, NY / Paris, France / Tokyo, Japan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+        
+        document.getElementById('sendMessageBtn')?.addEventListener('click', () => {
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            const msgDiv = document.getElementById('contactMsg');
+            
+            if (!name || !email || !message) {
+                msgDiv.innerHTML = 'Please fill in all fields';
+                msgDiv.style.color = '#e25555';
+            } else {
+                msgDiv.innerHTML = '✨ Thank you! We\'ll get back to you soon.';
+                msgDiv.style.color = '#4caf50';
+                document.getElementById('contactName').value = '';
+                document.getElementById('contactEmail').value = '';
+                document.getElementById('contactMessage').value = '';
+                
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'contact_form', { 'event_category': 'Conversion' });
+                }
+            }
+        });
+    }
+    
+    function showAdvertise() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section style="padding: 120px 0 60px;">
+                <div class="container">
+                    <h1 class="section-title">Advertise with StyleVerse</h1>
+                    <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                        <p>Reach fashion-forward audiences who are passionate about style, trends, and conscious consumption. StyleVerse offers various advertising opportunities for brands looking to connect with our engaged community.</p>
+                        <h3>Advertising Options</h3>
+                        <ul style="margin: 20px 0 20px 40px;">
+                            <li><strong>Sponsored Posts:</strong> Native articles that showcase your brand</li>
+                            <li><strong>Banner Ads:</strong> Premium placements across our site</li>
+                            <li><strong>Newsletter Sponsorship:</strong> Reach subscribers directly</li>
+                            <li><strong>Collaborations:</strong> Custom campaigns tailored to your goals</li>
+                        </ul>
+                        <h3>Our Audience</h3>
+                        <ul style="margin: 20px 0 20px 40px;">
+                            <li>Monthly Visitors: Growing community of fashion enthusiasts</li>
+                            <li>Demographics: 18-45, fashion-forward, urban professionals</li>
+                            <li>Interests: Luxury fashion, sustainable style, emerging designers</li>
+                        </ul>
+                        <p>For media kit and rate card, please contact us at <strong>advertise@styleverse.com</strong></p>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+    
+    function showTerms() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <section style="padding: 120px 0 60px;">
+                <div class="container">
+                    <h1 class="section-title">Terms & Privacy</h1>
+                    <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                        <h3>Terms of Use</h3>
+                        <p>By accessing StyleVerse, you agree to be bound by these terms. All content is for informational purposes only. We reserve the right to modify these terms at any time.</p>
+                        <h3>Privacy Policy</h3>
+                        <p>We respect your privacy. Any information collected (email for newsletter, comments) is used solely for site functionality and communication. We do not sell your data to third parties.</p>
+                        <h3>Copyright</h3>
+                        <p>All original content on StyleVerse is our property. You may share excerpts with attribution, but please do not reproduce entire articles without permission.</p>
+                        <h3>Affiliate Disclosure</h3>
+                        <p>Some links on this site may be affiliate links, meaning we earn a commission if you make a purchase. This helps support our free content.</p>
+                        <p style="margin-top: 40px;"><em>Last updated: January 2025</em></p>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+    
+    function showHome() {
+        renderHome();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
     function openPost(postId) {
-        const post = fullPosts[postId];
-        if(!post) return;
-        const modal = document.getElementById("postModal");
-        const modalContent = document.getElementById("modalContent");
+        const post = getPostById(postId);
+        if (!post) return;
+        
+        const modal = document.getElementById('postModal');
+        const modalContent = document.getElementById('modalContent');
+        const liked = localStorage.getItem(`liked_${postId}`) === 'true';
+        
         modalContent.innerHTML = `
-            <img src="${post.image}" alt="${post.title}" style="width:100%; border-radius:24px; margin-bottom:20px;" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&auto=format'">
+            <img src="${post.image}" alt="${post.title}" style="width:100%; border-radius:24px; margin-bottom:20px;">
             <div class="post-meta">
                 <span><i class="fas fa-tag"></i> ${post.category}</span>
                 <span><i class="far fa-calendar"></i> ${post.date}</span>
-                <span><i class="far fa-clock"></i> ${post.readTime}</span>
             </div>
-            <h1>${post.title}</h1>
+            <h1>${escapeHtml(post.title)}</h1>
             <div class="post-content">${post.content}</div>
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0e4da; display: flex; gap: 16px;">
-                <button class="btn" id="closeModalBtn" style="background: var(--accent);">Close Article</button>
+            
+            <div class="like-section">
+                <button class="like-button" id="modalLikeBtn" ${liked ? 'disabled' : ''}>
+                    <i class="${liked ? 'fas' : 'far'} fa-heart"></i>
+                </button>
+                <p id="likeCount">${post.likes || 0} ${post.likes === 1 ? 'person likes this' : 'people like this'}</p>
+                ${liked ? '<p style="color: var(--accent);">❤️ You liked this post!</p>' : ''}
+            </div>
+            
+            <div class="share-buttons">
+                <button class="share-btn" onclick="sharePost('twitter', '${encodeURIComponent(post.title)}', '${encodeURIComponent(window.location.href)}')"><i class="fab fa-twitter"></i> Twitter</button>
+                <button class="share-btn" onclick="sharePost('facebook', '${encodeURIComponent(post.title)}', '${encodeURIComponent(window.location.href)}')"><i class="fab fa-facebook"></i> Facebook</button>
+                <button class="share-btn" onclick="sharePost('pinterest', '${encodeURIComponent(post.title)}', '${encodeURIComponent(window.location.href)}')"><i class="fab fa-pinterest"></i> Pinterest</button>
+                <button class="share-btn" onclick="sharePost('whatsapp', '${encodeURIComponent(post.title)}', '${encodeURIComponent(window.location.href)}')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button class="share-btn" onclick="copyLink()"><i class="fas fa-link"></i> Copy Link</button>
+            </div>
+            
+            <div class="comments-section">
+                <h3>Discussion</h3>
+                <div class="comment-form">
+                    <input type="text" id="commentName" placeholder="Your name">
+                    <textarea id="commentText" rows="3" placeholder="Share your thoughts..."></textarea>
+                    <button class="btn" id="submitCommentBtn">Post Comment</button>
+                </div>
+                <div id="commentsList"></div>
             </div>
         `;
-        modal.style.display = "flex";
-        document.body.style.overflow = "hidden";
-        trackEvent("Content", "Open Full Post", post.title);
-        document.getElementById("closeModalBtn")?.addEventListener("click", closeModal);
-    }
-
-    function closeModal() { document.getElementById("postModal").style.display = "none"; document.body.style.overflow = "auto"; }
-
-    function renderBlog(filterCategory = null) {
-        const grid = document.getElementById("blogGrid");
-        if(!grid) return;
-        let filtered = filterCategory ? postsData.filter(p => p.category.toLowerCase().includes(filterCategory.toLowerCase())) : postsData;
-        if(filterCategory === "home") filtered = postsData;
-        grid.innerHTML = "";
-        filtered.forEach(post => {
-            const currentLikes = likesData[post.id] || 0;
-            const card = document.createElement("div");
-            card.className = "post-card";
-            card.innerHTML = `
-                <div class="card-img" style="background-image: url('${post.img}'); background-size: cover; background-position: center;"></div>
-                <div class="card-content">
-                    <span class="card-category">${post.category}</span>
-                    <h3>${post.title}</h3>
-                    <p>${post.excerpt}</p>
-                    <div class="post-footer">
-                        <button class="like-btn" data-id="${post.id}">
-                            <i class="far fa-heart"></i> <span class="like-count">${currentLikes}</span>
-                        </button>
-                        <span class="trend-tag"><i class="fas fa-chart-line"></i> ${post.trend}</span>
-                    </div>
-                    <div class="read-more" data-id="${post.id}">Read full story <i class="fas fa-arrow-right"></i></div>
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Render comments
+        const commentsList = document.getElementById('commentsList');
+        if (post.comments && post.comments.length > 0) {
+            commentsList.innerHTML = post.comments.map(c => `
+                <div class="comment">
+                    <strong>${escapeHtml(c.name)}</strong> <small>${new Date(c.date).toLocaleDateString()}</small>
+                    <p>${escapeHtml(c.text)}</p>
                 </div>
-            `;
-            grid.appendChild(card);
+            `).join('');
+        } else {
+            commentsList.innerHTML = '<div class="no-comments">No comments yet. Be the first to share your thoughts!</div>';
+        }
+        
+        // Like button
+        document.getElementById('modalLikeBtn')?.addEventListener('click', () => {
+            const result = likePost(postId);
+            if (result.success) {
+                document.getElementById('likeCount').innerHTML = `${result.newCount} ${result.newCount === 1 ? 'person likes this' : 'people like this'}`;
+                const btn = document.getElementById('modalLikeBtn');
+                btn.innerHTML = '<i class="fas fa-heart"></i>';
+                btn.disabled = true;
+                const likeText = document.createElement('p');
+                likeText.style.color = 'var(--accent)';
+                likeText.innerHTML = '❤️ You liked this post!';
+                btn.parentElement.appendChild(likeText);
+            } else {
+                alert(result.message);
+            }
         });
         
-        document.querySelectorAll(".like-btn").forEach(btn => { 
-            btn.addEventListener("click", (e) => { 
-                e.stopPropagation(); 
-                const id = parseInt(btn.getAttribute("data-id")); 
-                likesData[id] = (likesData[id] || 0) + 1; 
-                saveLikes(); 
-                const countSpan = btn.querySelector(".like-count");
-                if(countSpan) countSpan.innerText = likesData[id];
-                btn.classList.add("liked");
-                const icon = btn.querySelector("i");
-                icon.classList.remove("far");
-                icon.classList.add("fas");
-                showToast(`❤️ You loved "${postsData.find(p=>p.id===id)?.title}"!`);
-                trackEvent("Engagement", "Like", `post_${id}`);
-            }); 
+        // Comment button
+        document.getElementById('submitCommentBtn')?.addEventListener('click', () => {
+            const name = document.getElementById('commentName').value.trim();
+            const text = document.getElementById('commentText').value.trim();
+            
+            if (!name || !text) {
+                alert('Please enter your name and comment');
+                return;
+            }
+            
+            addComment(postId, name, text);
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentText').value = '';
+            
+            // Refresh comments
+            const updatedPost = getPostById(postId);
+            if (updatedPost.comments && updatedPost.comments.length > 0) {
+                commentsList.innerHTML = updatedPost.comments.map(c => `
+                    <div class="comment">
+                        <strong>${escapeHtml(c.name)}</strong> <small>${new Date(c.date).toLocaleDateString()}</small>
+                        <p>${escapeHtml(c.text)}</p>
+                    </div>
+                `).join('');
+            }
         });
         
-        document.querySelectorAll(".read-more").forEach(el => { 
-            el.addEventListener("click", (e) => { 
-                e.stopPropagation(); 
-                const id = parseInt(el.getAttribute("data-id")); 
-                openPost(id); 
-            }); 
+        // Track in GA
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'view_post', { 'event_category': 'Content', 'event_label': post.title });
+        }
+    }
+    
+    function closePostModal() {
+        document.getElementById('postModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // ===== SHARE FUNCTIONS =====
+    window.sharePost = function(platform, title, url) {
+        let shareUrl = '';
+        switch(platform) {
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                break;
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                break;
+            case 'pinterest':
+                shareUrl = `https://pinterest.com/pin/create/button/?url=${url}&description=${title}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${title} ${url}`;
+                break;
+        }
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'share', { 'event_category': 'Social', 'event_label': platform });
+        }
+    };
+    
+    window.copyLink = function() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+    };
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // ===== ADMIN PANEL =====
+    let isAdminLoggedIn = false;
+    
+    function showAdminLogin() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <div class="login-screen" id="adminLoginScreen">
+                <div class="login-box">
+                    <h2>StyleVerse Admin</h2>
+                    <p>Enter password to access admin panel</p>
+                    <input type="password" id="adminPasswordInput" placeholder="Password">
+                    <button class="btn" id="adminLoginBtn">Login</button>
+                    <p id="adminLoginError" style="color: #dc3545; margin-top: 12px;"></p>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('adminLoginBtn')?.addEventListener('click', () => {
+            const password = document.getElementById('adminPasswordInput').value;
+            if (password === CONFIG.adminPassword) {
+                isAdminLoggedIn = true;
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                renderAdminPanel();
+            } else {
+                document.getElementById('adminLoginError').textContent = 'Incorrect password';
+            }
+        });
+    }
+    
+    function renderAdminPanel() {
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <div class="admin-container">
+                <div class="admin-header">
+                    <h1><i class="fas fa-crown"></i> StyleVerse Admin Panel</h1>
+                    <button class="btn btn-outline" id="adminLogoutBtn">Logout</button>
+                </div>
+                
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="create">✏️ Create Post</button>
+                    <button class="admin-tab" data-tab="manage">📋 Manage Posts</button>
+                </div>
+                
+                <div id="createPanel" class="admin-panel active">
+                    <h2>Create New Post</h2>
+                    <form id="createPostForm">
+                        <div class="form-group">
+                            <label>Title *</label>
+                            <input type="text" id="postTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="postCategory">
+                                <option value="Runway">Runway Reports</option>
+                                <option value="Street Style">Street Style Diaries</option>
+                                <option value="Sustainable">Sustainable Futures</option>
+                                <option value="Beauty">Beauty & Beyond</option>
+                                <option value="Trend Report">Trend Report</option>
+                                <option value="Designer Spotlight">Designer Spotlight</option>
+                                <option value="Editorial">Editorial</option>
+                                <option value="Accessories">Accessories</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Featured Image URL</label>
+                            <input type="text" id="postImage" placeholder="https://images.unsplash.com/...">
+                            <div id="imagePreview"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Excerpt (short description)</label>
+                            <textarea id="postExcerpt" rows="3" placeholder="A short preview of your post..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Content * (HTML supported)</label>
+                            <textarea id="postContent" rows="15" required placeholder="Write your post content here. You can use HTML tags like &lt;p&gt;, &lt;h3&gt;, &lt;ul&gt;, etc."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Publish Post</button>
+                    </form>
+                </div>
+                
+                <div id="managePanel" class="admin-panel">
+                    <h2>Manage Posts</h2>
+                    <div id="postsList" class="posts-list"></div>
+                </div>
+            </div>
+        `;
+        
+        // Tab switching
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}Panel`).classList.add('active');
+            });
         });
         
-        document.querySelectorAll(".post-card").forEach(card => { 
-            card.addEventListener("click", (e) => { 
-                if(!e.target.closest(".like-btn") && !e.target.closest(".read-more")) { 
-                    const id = parseInt(card.querySelector(".read-more")?.getAttribute("data-id")); 
-                    if(id) openPost(id); 
-                } 
-            }); 
+        // Create post
+        document.getElementById('createPostForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newPost = {
+                title: document.getElementById('postTitle').value,
+                category: document.getElementById('postCategory').value,
+                image: document.getElementById('postImage').value,
+                excerpt: document.getElementById('postExcerpt').value,
+                content: document.getElementById('postContent').value
+            };
+            addPost(newPost);
+            alert('Post published successfully!');
+            document.getElementById('createPostForm').reset();
+            renderPostsList();
+        });
+        
+        // Image preview
+        document.getElementById('postImage')?.addEventListener('input', (e) => {
+            const preview = document.getElementById('imagePreview');
+            if (e.target.value) {
+                preview.innerHTML = `<img src="${e.target.value}" style="width:100px; height:100px; object-fit:cover; border-radius:12px; margin-top:12px;" onerror="this.src='https://via.placeholder.com/100'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+        
+        renderPostsList();
+        
+        document.getElementById('adminLogoutBtn')?.addEventListener('click', () => {
+            isAdminLoggedIn = false;
+            sessionStorage.removeItem('adminLoggedIn');
+            showHome();
         });
     }
-
-    function initNavigation() {
-        document.querySelectorAll("[data-nav]").forEach(item => { 
-            item.addEventListener("click", () => { 
-                const section = item.getAttribute("data-nav"); 
-                if(section === "home") renderBlog("home");
-                else if(section === "runway") renderBlog("runway");
-                else if(section === "editorial") renderBlog("editorial");
-                else if(section === "street") renderBlog("street");
-                else if(section === "magazine") { renderBlog("home"); showToast("Magazine section coming soon!"); }
-                else renderBlog("home");
-                document.getElementById("blogSection")?.scrollIntoView({ behavior: "smooth" });
-                document.getElementById("mobileMenu")?.classList.remove("open");
-            }); 
-        });
-        document.getElementById("logoHome")?.addEventListener("click", () => renderBlog("home"));
-        document.getElementById("exploreBtn")?.addEventListener("click", () => { renderBlog("home"); document.getElementById("blogSection")?.scrollIntoView({ behavior: "smooth" }); });
-        document.getElementById("joinBtn")?.addEventListener("click", () => { document.querySelector(".newsletter")?.scrollIntoView({ behavior: "smooth" }); });
+    
+    function renderPostsList() {
+        const postsList = document.getElementById('postsList');
+        if (!postsList) return;
+        
+        if (posts.length === 0) {
+            postsList.innerHTML = '<div class="no-posts">No posts yet. Create your first post!</div>';
+            return;
+        }
+        
+        postsList.innerHTML = posts.map(post => `
+            <div class="post-item">
+                <div class="post-info">
+                    <h4>${escapeHtml(post.title)}</h4>
+                    <p>${post.category} | ${post.date} | ❤️ ${post.likes || 0} | 💬 ${(post.comments || []).length}</p>
+                </div>
+                <div class="post-actions">
+                    <button class="btn btn-outline" onclick="editPostPrompt(${post.id})">Edit</button>
+                    <button class="btn btn-danger" onclick="deletePostPrompt(${post.id})">Delete</button>
+                </div>
+            </div>
+        `).join('');
     }
-
-    function setupNewsletter() {
-        document.getElementById("subscribeBtn")?.addEventListener("click", () => {
-            const email = document.getElementById("newsEmail").value.trim();
-            const msgDiv = document.getElementById("newsMsg");
-            if(!email) { msgDiv.innerHTML = "✨ Please enter your email!"; msgDiv.style.color = "#ffd966"; }
-            else if(!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email)) { msgDiv.innerHTML = "⛓️ Invalid email address!"; msgDiv.style.color = "#f5b7b1"; }
-            else { msgDiv.innerHTML = `🎉 Thanks ${email.split('@')[0]}! You're now part of StyleVerse.`; msgDiv.style.color = "#cbe6c2"; document.getElementById("newsEmail").value = ""; trackEvent("Newsletter", "Subscribe", email); showToast("Subscribed successfully!"); setTimeout(() => msgDiv.innerHTML = "", 3000); }
+    
+    window.editPostPrompt = function(id) {
+        const post = getPostById(id);
+        const newTitle = prompt('Edit title:', post.title);
+        if (newTitle && newTitle.trim()) {
+            updatePost(id, { title: newTitle.trim() });
+            renderPostsList();
+            alert('Post updated!');
+        }
+    };
+    
+    window.deletePostPrompt = function(id) {
+        if (confirm('Are you sure you want to delete this post? This cannot be undone.')) {
+            deletePost(id);
+            renderPostsList();
+            alert('Post deleted!');
+        }
+    };
+    
+    // ===== SEARCH FUNCTIONALITY =====
+    function setupSearch() {
+        const searchToggle = document.getElementById('searchToggle');
+        const searchBar = document.getElementById('searchBar');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        if (!searchToggle) return;
+        
+        searchToggle.addEventListener('click', () => {
+            searchBar.classList.toggle('active');
+            if (searchBar.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
+        
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.trim().toLowerCase();
+            
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+            
+            searchTimeout = setTimeout(() => {
+                const results = posts.filter(p => 
+                    p.title.toLowerCase().includes(query) || 
+                    (p.excerpt || p.content).toLowerCase().includes(query) ||
+                    p.category.toLowerCase().includes(query)
+                );
+                
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                } else {
+                    searchResults.innerHTML = results.slice(0, 5).map(post => `
+                        <div class="search-result-item" onclick="openPost(${post.id}); searchBar.classList.remove('active');">
+                            <img src="${post.image}" alt="">
+                            <div>
+                                <strong>${escapeHtml(post.title)}</strong>
+                                <span>${post.category}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                if (typeof gtag !== 'undefined' && query.length > 2) {
+                    gtag('event', 'search', { 'search_term': query, 'result_count': results.length });
+                }
+            }, 300);
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!searchBar?.contains(e.target) && !searchToggle.contains(e.target)) {
+                searchBar?.classList.remove('active');
+                if (searchResults) searchResults.innerHTML = '';
+            }
         });
     }
-
-    function initMobileMenu() {
-        const toggle = document.getElementById("menuToggle");
-        const mobileMenu = document.getElementById("mobileMenu");
-        toggle.addEventListener("click", () => { 
-            mobileMenu.classList.toggle("open"); 
-            const icon = toggle.querySelector("i"); 
-            if(mobileMenu.classList.contains("open")) { 
-                icon.classList.remove("fa-bars"); 
-                icon.classList.add("fa-times"); 
-            } else { 
-                icon.classList.remove("fa-times"); 
-                icon.classList.add("fa-bars"); 
-            } 
-        });
-        mobileMenu.querySelectorAll("a").forEach(link => { 
-            link.addEventListener("click", () => { 
-                mobileMenu.classList.remove("open"); 
-                const icon = toggle.querySelector("i"); 
-                icon.classList.remove("fa-times"); 
-                icon.classList.add("fa-bars"); 
-            }); 
+    
+    // ===== DARK MODE =====
+    function setupDarkMode() {
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
         });
     }
-
-    document.querySelector(".close-modal")?.addEventListener("click", closeModal);
-    window.addEventListener("click", (e) => { if(e.target === document.getElementById("postModal")) closeModal(); });
-
-    initLikes();
-    renderBlog("home");
-    initNavigation();
-    setupNewsletter();
-    initMobileMenu();
-    showToast("✨ Welcome to StyleVerse — authentic fashion journalism. Click any post to read!");
+    
+    // ===== MOBILE MENU =====
+    function setupMobileMenu() {
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+    }
+    
+    // ===== LOAD SOCIAL LINKS =====
+    function loadSocialLinks() {
+        const socialContainer = document.getElementById('socialIcons');
+        if (!socialContainer) return;
+        
+        const socials = CONFIG.socialLinks;
+        const socialOrder = ['instagram', 'twitter', 'pinterest', 'tiktok'];
+        
+        socialContainer.innerHTML = '';
+        socialOrder.forEach(platform => {
+            const url = socials[platform];
+            if (url && url.trim() !== '') {
+                const iconMap = {
+                    instagram: 'fab fa-instagram',
+                    twitter: 'fab fa-twitter',
+                    pinterest: 'fab fa-pinterest',
+                    tiktok: 'fab fa-tiktok'
+                };
+                socialContainer.innerHTML += `<a href="${url}" target="_blank" rel="noopener noreferrer" data-platform="${platform}" class="social-link"><i class="${iconMap[platform]}"></i></a>`;
+            }
+        });
+    }
+    
+    // ===== INITIALIZE =====
+    loadPostsFromStorage();
+    renderHome();
+    setupSearch();
+    setupDarkMode();
+    setupMobileMenu();
+    loadSocialLinks();
+    
+    // Make functions global for onclick
+    window.showHome = showHome;
+    window.showExplore = showExplore;
+    window.showAbout = showAbout;
+    window.showContact = showContact;
+    window.showAdvertise = showAdvertise;
+    window.showTerms = showTerms;
+    window.showCategory = showCategory;
+    window.showAdminLogin = showAdminLogin;
+    window.openPost = openPost;
+    window.closePostModal = closePostModal;
+    
+    // Check for admin session
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+        isAdminLoggedIn = true;
+    }
 </script>
 </body>
 </html>
